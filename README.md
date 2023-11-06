@@ -2,10 +2,10 @@
 ## Semestre 2023-2024/I
 
 ## Nombre del proyecto
-TODO: Sistema bibliotecario
+Sistema bibliotecario
 
 ## Descripción del proyecto
-TODO: Diseñar y desarrollar un sistema de gestión de bibliotecas eficiente y fácil de usar. Permitirá a los bibliotecarios
+Diseñar y desarrollar un sistema de gestión de bibliotecas eficiente y fácil de usar. Permitirá a los bibliotecarios
 y usuarios llevar un registro completo de los libros, gestionar préstamos y devoluciones, así como proporcionar información 
 detallada sobre los recusros dispobibles en la biblioteca.
 
