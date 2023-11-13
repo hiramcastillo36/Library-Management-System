@@ -22,7 +22,7 @@ public class LibraryApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(LibraryApplication.class.getResource("view/Interface.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Hello!");
+        stage.setTitle("Library");
         stage.setScene(scene);
         stage.show();
 
