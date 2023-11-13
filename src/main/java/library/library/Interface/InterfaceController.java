@@ -23,7 +23,6 @@ public class InterfaceController
     void Select(ActionEvent event) {
 
     }
-
     @javafx.fxml.FXML
     public void initialize() {
 

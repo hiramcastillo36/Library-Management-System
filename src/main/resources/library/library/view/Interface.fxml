@@ -21,7 +21,6 @@
             <Label layoutX="344.0" layoutY="7.0" text="Inicia Sesión" />
             <ComboBox fx:id="dropdown" layoutX="443.0" layoutY="2.0" onAction="#Select" prefWidth="150.0" />
             <TextField fx:id="search" layoutX="92.0" layoutY="173.0" prefHeight="26.0" prefWidth="425.0" promptText="Busca por Título o Autor" />
-
          </children>
       </AnchorPane>
    </center>
