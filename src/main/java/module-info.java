@@ -12,5 +12,7 @@ module library.library {
     opens library.library to javafx.fxml;
     exports library.library;
     exports library.library.controller;
+    exports library.library.Interface;
     opens library.library.controller to javafx.fxml;
+    opens library.library.Interface;
 }
