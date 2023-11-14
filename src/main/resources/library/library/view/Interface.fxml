@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -7,9 +8,9 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.shape.SVGPath?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: CCCDD3;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="library.library.Interface.InterfaceController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: CCCDD3;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.library.Interface.InterfaceController">
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -18,13 +19,14 @@
                   <Font size="48.0" />
                </font>
             </Text>
-            <Label layoutX="344.0" layoutY="7.0" text="Inicia Sesión" />
-            <ComboBox fx:id="dropdown" layoutX="443.0" layoutY="2.0" onAction="#Select" prefWidth="150.0" />
+            <Label layoutX="450.0" layoutY="7.0" text="Inicia Sesión" />
+            <SVGPath fx:id="icon" content="M7 49.5H49V44H7V49.5ZM7 35.75H49V30.25H7V35.75ZM7 16.5V22H49V16.5H7Z" fill="#696767" scaleX=".5" scaleY=".5"/>
+            <ComboBox fx:id="dropdown" layoutX="520.0" layoutY="2.0" onAction="#Select" prefWidth="20.0" />
             <TextField fx:id="search" layoutX="92.0" layoutY="173.0" prefHeight="26.0" prefWidth="425.0" promptText="Busca por Título o Autor" />
          </children>
       </AnchorPane>
    </center>
     <stylesheets>
-       
+       <URL value="@InterfaceCSS.css" />
     </stylesheets>
 </BorderPane>

@@ -1,0 +1,10 @@
+.combo-box{
+    -fx-opacity: 0%;
+
+}
+
+#icon
+{
+    -fx-translate-x: 525;
+    -fx-translate-y: -15;
+}
