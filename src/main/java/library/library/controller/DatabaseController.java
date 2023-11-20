@@ -34,4 +34,26 @@ public class DatabaseController {
             System.out.println(rs.getString("ISBN"));
         }
     }
+
+    public static ResultSet executeQuery(String query) throws SQLException {
+        PreparedStatement statement = getConnection().prepareStatement(query);
+        return statement.executeQuery();
+    }
+
+    public static void executeUpdate(String query) throws SQLException {
+        PreparedStatement statement = getConnection().prepareStatement(query);
+        statement.executeUpdate();
+    }
+
+    public static void executeInsert(String query) throws SQLException {
+        PreparedStatement statement = getConnection().prepareStatement(query);
+        statement.execute();
+    }
+
+    public static void closeConnection() throws SQLException {
+        if (connection != null) {
+            connection.close();
+        }
+    }
+
 }
