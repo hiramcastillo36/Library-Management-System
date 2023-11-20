@@ -1,4 +1,4 @@
-package library.library.util;
+package library.library.models;
 
 public class Student {
     private String firstName;
