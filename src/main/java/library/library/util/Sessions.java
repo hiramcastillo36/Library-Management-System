@@ -9,10 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Sessions {
-    private String email;
-    private String password;
 
-    private String currentUser = null;
+    private Account currentUser = null;
 
     public void signIn(String email, String password) {
         ResultSet rs = null;
@@ -21,10 +19,8 @@ public class Sessions {
             if (rs.next()) {
                 String hashPassword = rs.getString("contraseña");
                 if (PasswordHash.validatePassword(password, hashPassword)) {
-                    this.email = email;
-                    this.password = password;
-                    this.currentUser = email;
                     System.out.println("Signed in");
+                    currentUser = new Account(email, rs.getString("tipo_usuario"));
                 } else {
                     System.out.println("Wrong password");
                 }
@@ -48,7 +44,8 @@ public class Sessions {
                 System.out.println("Email already exists");
             } else {
                 String hashPassword = PasswordHash.createHash(password);
-                String insert = "INSERT INTO Cuenta(correo_electronico, contraseña, tipo_usuario) VALUES('" + email + "', '" + hashPassword + "', 'Usuario')";
+                String insert = "INSERT INTO Cuenta(correo_electronico, contraseña, tipo_usuario) VALUES('" +
+                                email + "', '" + hashPassword + "', 'Usuario')";
                 DatabaseController.executeInsert(insert);
             }
         }catch (SQLException e) {
@@ -58,11 +55,6 @@ public class Sessions {
         } catch (InvalidKeySpecException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public void signOut() {
-        this.email = null;
-        this.password = null;
     }
 
     public static void main(String[] args) {
