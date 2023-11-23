@@ -14,7 +14,9 @@ module library.library {
     exports library.library.controller;
     exports library.library.homePage;
     exports library.library.login;
+    exports library.library.AccountInterface;
     opens library.library.controller to javafx.fxml;
     opens library.library.homePage;
     opens library.library.login;
+    opens library.library.AccountInterface;
 }
