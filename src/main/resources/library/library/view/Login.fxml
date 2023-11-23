@@ -35,6 +35,7 @@
             </ImageView>
          </children>
       </HBox>
-      <Button fx:id="button" layoutX="418.0" layoutY="289.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="151.0" text="Enviar" />
+      <Button fx:id="button" layoutX="418.0" layoutY="100.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="151.0" text="Enviar" onAction="#signIn" />
+      <Button fx:id="buttonSignUp" layoutX="418.0" layoutY="289.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="151.0" text="Registrarse" onAction="#signUp" />
    </children>
 </AnchorPane>
