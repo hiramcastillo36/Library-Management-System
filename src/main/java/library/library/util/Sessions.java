@@ -15,7 +15,7 @@ public class Sessions {
     private String email;
     private String password;
 
-    private String currentUser = null;
+    private Account currentUser = null;
 
 
     public int signIn(String email, String password) {
@@ -30,7 +30,6 @@ public class Sessions {
                 if (PasswordHash.validatePassword(password, hashPassword)) {
                     this.email = email;
                     this.password = password;
-                    this.currentUser = email;
                     System.out.println("Signed in");
                     currentUser = new Account(email, rs.getString("tipo_usuario"));
                     return 1;
