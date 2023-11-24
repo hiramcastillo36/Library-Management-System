@@ -1,5 +1,8 @@
 package library.library.util;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import library.library.LibraryApplication;
 import library.library.controller.DatabaseController;
 import library.library.models.Account;
 
@@ -12,20 +15,29 @@ public class Sessions {
 
     private Account currentUser = null;
 
-    public void signIn(String email, String password) {
+
+    public int signIn(String email, String password) {
+        // -1: Email doesn't exist
+        // 0: Wrong password
+        // 1: Signed in
         ResultSet rs = null;
         try {
             rs = DatabaseController.executeQuery("SELECT * FROM Cuenta WHERE correo_electronico = '" + email + "'");
             if (rs.next()) {
                 String hashPassword = rs.getString("contraseña");
                 if (PasswordHash.validatePassword(password, hashPassword)) {
+                    this.email = email;
+                    this.password = password;
                     System.out.println("Signed in");
                     currentUser = new Account(email, rs.getString("tipo_usuario"));
+                    return 1;
                 } else {
                     System.out.println("Wrong password");
+                    return 0;
                 }
             } else {
                 System.out.println("Email doesn't exist");
+                return -1;
             }
         }catch (SQLException e) {
             e.printStackTrace();
@@ -34,6 +46,7 @@ public class Sessions {
         } catch (InvalidKeySpecException e) {
             throw new RuntimeException(e);
         }
+        return -2;
     }
 
     public void signUp(String email, String password) {
@@ -58,7 +71,7 @@ public class Sessions {
     }
 
     public static void main(String[] args) {
-        /*Sessions sessions = new Sessions();
+        Sessions sessions = new Sessions();
         sessions.signUp("hashpassword", "test");
         sessions.signIn("hashpassword", "test");
         ResultSet rs = null;
@@ -78,7 +91,7 @@ public class Sessions {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        }*/
+        }
     }
 
 }
