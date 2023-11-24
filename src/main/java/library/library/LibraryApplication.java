@@ -31,6 +31,7 @@ public class LibraryApplication extends Application {
     public static void main(String[] args) throws SQLException {
         DatabaseController.getAutores();
         DatabaseController.getAutores();
+        DatabaseController.getAccountData();
         launch();
     }
 }
