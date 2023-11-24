@@ -12,8 +12,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Sessions {
-    private String email;
-    private String password;
 
     private Account currentUser = null;
 
@@ -59,7 +57,8 @@ public class Sessions {
                 System.out.println("Email already exists");
             } else {
                 String hashPassword = PasswordHash.createHash(password);
-                String insert = "INSERT INTO Cuenta(correo_electronico, contraseña, tipo_usuario) VALUES('" + email + "', '" + hashPassword + "', 'Usuario')";
+                String insert = "INSERT INTO Cuenta(correo_electronico, contraseña, tipo_usuario) VALUES('" +
+                                email + "', '" + hashPassword + "', 'Usuario')";
                 DatabaseController.executeInsert(insert);
             }
         }catch (SQLException e) {
@@ -69,11 +68,6 @@ public class Sessions {
         } catch (InvalidKeySpecException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public void signOut() {
-        this.email = null;
-        this.password = null;
     }
 
     public static void main(String[] args) {
