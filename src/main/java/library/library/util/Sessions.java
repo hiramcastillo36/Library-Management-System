@@ -26,8 +26,6 @@ public class Sessions {
             if (rs.next()) {
                 String hashPassword = rs.getString("contraseña");
                 if (PasswordHash.validatePassword(password, hashPassword)) {
-                    this.email = email;
-                    this.password = password;
                     System.out.println("Signed in");
                     currentUser = new Account(email, rs.getString("tipo_usuario"));
                     return 1;
