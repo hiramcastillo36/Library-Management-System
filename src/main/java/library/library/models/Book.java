@@ -4,14 +4,17 @@ package library.library.models;
  */
 public class Book {
 
+
      Integer isbn;
-    String title;
+     
+     String title;
 
      String year;
 
      String floor;
 
      String shelf;
+
 
 
     /**
@@ -21,9 +24,9 @@ public class Book {
      * @param title     The title of the book.
      * @param editorial The editorial that published the book.
      * @param author    The author(s) of the book.
-     * @param loan      The loan status of the book.
      * @param category  The category to which the book belongs.
      */
+
     public Book(int ISBN, String title, String year, String floor, String shelf) {
         this.isbn = ISBN;
         this.title = title;
@@ -31,6 +34,7 @@ public class Book {
         this.floor = floor;
         this.shelf = shelf;
     }
+
 
     /**
      * Gets the ISBN (unique identifier) of the book.
