@@ -7,6 +7,11 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.library.login.LoginController">
    <children>
+      <Text fx:id="back" layoutX="16.0" layoutY="32.0" onMouseClicked="#goBack" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Text>
       <Label layoutX="327.0" layoutY="215.0" text="Contraseña:" />
       <Label layoutX="289.0" layoutY="142.0" text="Correo electronico:" />
       <PasswordField fx:id="password" layoutX="403.0" layoutY="210.0" prefHeight="26.0" prefWidth="182.0" promptText="123456">
@@ -15,14 +20,14 @@
          </font>
       </PasswordField>
       <TextField fx:id="email" layoutX="403.0" layoutY="138.0" prefHeight="26.0" prefWidth="182.0" promptText="a123456@alumnos.uaslp.mx" />
-      <Label layoutX="431.0" layoutY="51.0" prefHeight="50.0" prefWidth="126.0" text="Inicio de sesión">
+      <Label layoutX="426.0" layoutY="54.0" prefHeight="50.0" prefWidth="126.0" text="Inicio de sesión">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
       <HBox layoutX="26.0" layoutY="39.0" prefHeight="322.0" prefWidth="262.0">
          <children>
-            <ImageView fx:id="img" fitHeight="310.0" fitWidth="242.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="img" fitHeight="316.0" fitWidth="254.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assets/UASLP.png" />
                </image>
