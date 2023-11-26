@@ -37,17 +37,11 @@ public class LibraryApplication extends Application {
     }
 
     public static int signIn(String email, String password) {
-        int result = session.signIn(email, password);
-        if (result == 1) {
-            return 1;
-        } else {
-            System.out.println("Error");
-            return -1;
-        }
+        return session.signIn(email, password);
     }
 
-    public static void signUp(String email, String password) {
-        session.signUp(email, password);
+    public static int signUp(String email, String password) {
+        return session.signUp(email, password);
     }
 
     public static void signOut() {
@@ -58,7 +52,7 @@ public class LibraryApplication extends Application {
         return session.getCurrentUser();
     }
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) {
         launch();
     }
 }

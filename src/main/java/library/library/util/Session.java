@@ -45,12 +45,13 @@ public class Session {
         return -2;
     }
 
-    public void signUp(String email, String password) {
+    public int signUp(String email, String password) {
         ResultSet rs = null;
         try {
             rs = DatabaseController.executeQuery("SELECT * FROM Cuenta WHERE correo_electronico = '" + email + "'");
             if (rs.next()) {
                 System.out.println("Email already exists");
+                return 0;
             } else {
                 String hashPassword = PasswordHash.createHash(password);
                 String insert = "INSERT INTO Cuenta(correo_electronico, contraseña, tipo_usuario) VALUES('" +
@@ -58,6 +59,7 @@ public class Session {
                 DatabaseController.executeInsert(insert);
                 System.out.println("Signed up");
                 currentUser = new Account(email, "Usuario");
+                return 1;
             }
         }catch (SQLException e) {
             e.printStackTrace();
@@ -66,6 +68,7 @@ public class Session {
         } catch (InvalidKeySpecException e) {
             throw new RuntimeException(e);
         }
+        return -1;
     }
 
     public Account getCurrentUser() {
