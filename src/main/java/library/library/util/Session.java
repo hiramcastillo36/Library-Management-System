@@ -1,7 +1,5 @@
 package library.library.util;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import library.library.LibraryApplication;
 import library.library.controller.DatabaseController;
 import library.library.models.Account;
@@ -11,10 +9,9 @@ import java.security.spec.InvalidKeySpecException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Sessions {
+public class Session {
 
     private Account currentUser = null;
-
 
     public int signIn(String email, String password) {
         // -1: Email doesn't exist
@@ -58,6 +55,8 @@ public class Sessions {
                 String insert = "INSERT INTO Cuenta(correo_electronico, contraseña, tipo_usuario) VALUES('" +
                                 email + "', '" + hashPassword + "', 'Usuario')";
                 DatabaseController.executeInsert(insert);
+                System.out.println("Signed up");
+                currentUser = new Account(email, "Usuario");
             }
         }catch (SQLException e) {
             e.printStackTrace();
@@ -68,8 +67,17 @@ public class Sessions {
         }
     }
 
+    public Account getCurrentUser() {
+        return currentUser;
+    }
+
+    public void signOut() {
+        currentUser = null;
+        LibraryApplication.changeScene("interface");
+    }
+
     public static void main(String[] args) {
-        Sessions sessions = new Sessions();
+        Session sessions = new Session();
         sessions.signUp("hashpassword", "test");
         sessions.signIn("hashpassword", "test");
         ResultSet rs = null;
