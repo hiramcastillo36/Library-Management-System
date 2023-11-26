@@ -1,6 +1,7 @@
 package library.library.controller;
 
 import library.library.LibraryApplication;
+import library.library.models.Account;
 
 import java.sql.*;
 import java.util.logging.Logger;
@@ -32,6 +33,19 @@ public class DatabaseController {
         ResultSet rs = statement.executeQuery();
         while (rs.next()) {
             System.out.println(rs.getString("ISBN"));
+        }
+    }
+
+    public static void getAccountData() throws SQLException{
+        String query = "SELECT correo_electronico, contraseña, tipo_usuario FROM Cuenta";
+        PreparedStatement statement = getConnection().prepareStatement(query);
+        ResultSet rs = statement.executeQuery();
+        while(rs.next())
+        {
+            System.out.println(rs.getString("correo_electronico")) ;
+            System.out.println(rs.getString("contraseña"));
+            System.out.println(rs.getString("tipo_usuario"));
+
         }
     }
 

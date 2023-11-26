@@ -8,5 +8,19 @@
       <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/src/main/resources/database/Biblioteca_12.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="Biblioteca_12 [2]" uuid="bcaa3d60-b1ed-486e-bf85-cdf4dbec7680">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\andre\OneDrive\Documentos\GitHub\proyecto-ruelas-castillo-aguirre\src\main\resources\library\library\database\Biblioteca_12.db</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+    <data-source source="LOCAL" name="Biblioteca_12.db" uuid="d44c792f-eb4d-4b16-b1c5-143e97b0ec94">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\andre\OneDrive\Documentos\GitHub\proyecto-ruelas-castillo-aguirre\src\main\resources\library\library\database\Biblioteca_12.db</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

@@ -3,12 +3,20 @@ package library.library.models;
  * Represents a book in the library.
  */
 public class Book {
-    ;
-    private int ISBN;
-    private String title;
-    private String editorial;
-    private String author;
-    private String category;
+
+
+     Integer isbn;
+     
+     String title;
+
+     String year;
+
+     String floor;
+
+     String shelf;
+
+
+
     /**
      * Constructs a Book object with the specified attributes.
      *
@@ -18,21 +26,23 @@ public class Book {
      * @param author    The author(s) of the book.
      * @param category  The category to which the book belongs.
      */
-    public Book(int ISBN, String title, String editorial, String author, String category)
-    {
-        this.ISBN = ISBN;
+
+    public Book(int ISBN, String title, String year, String floor, String shelf) {
+        this.isbn = ISBN;
         this.title = title;
-        this.editorial = editorial;
-        this.author = author;
-        this.category = category;
+        this.year = year;
+        this.floor = floor;
+        this.shelf = shelf;
     }
+
+
     /**
      * Gets the ISBN (unique identifier) of the book.
      *
      * @return The ISBN of the book.
      */
     public int getISBN() {
-        return ISBN;
+        return isbn;
     }
     /**
      * Gets the title of the book.
@@ -42,29 +52,40 @@ public class Book {
     public String getTitle() {
         return title;
     }
-    /**
-     * Gets the editorial that published the book.
-     *
-     * @return The editorial of the book.
-     */
-    public String getEditorial() {
-        return editorial;
-    }
-    /**
-     * Gets the author(s) of the book.
-     *
-     * @return The author(s) of the book.
-     */
-    public String getAuthor() {
-        return author;
-    }
-    /**
-     * Gets the category to which the book belongs.
-     *
-     * @return The category of the book.
-     */
-    public String getCategory() {
-        return category;
+
+    public String getYear() {
+        return year;
     }
 
+    public Integer getIsbn() {
+        return isbn;
+    }
+
+    public String getFloor() {
+        return floor;
+    }
+
+    public String getShelf() {
+        return shelf;
+    }
+
+    public void setIsbn(Integer isbn) {
+        this.isbn = isbn;
+    }
+
+    public void setFloor(String floor) {
+        this.floor = floor;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    public void setShelf(String shelf) {
+        this.shelf = shelf;
+    }
 }
