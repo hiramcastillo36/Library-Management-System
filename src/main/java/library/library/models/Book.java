@@ -3,42 +3,28 @@ package library.library.models;
  * Represents a book in the library.
  */
 public class Book {
-
-    private String name;
+    ;
     private int ISBN;
     private String title;
     private String editorial;
     private String author;
-    private boolean loan;
-    private Category category;
+    private String category;
     /**
      * Constructs a Book object with the specified attributes.
      *
-     * @param name      The name of the book.
      * @param ISBN      The unique identifier (ISBN) for the book.
      * @param title     The title of the book.
      * @param editorial The editorial that published the book.
      * @param author    The author(s) of the book.
-     * @param loan      The loan status of the book.
      * @param category  The category to which the book belongs.
      */
-    public Book(String name, int ISBN, String title, String editorial, String author, boolean loan, Category category)
+    public Book(int ISBN, String title, String editorial, String author, String category)
     {
-        this.name = name;
         this.ISBN = ISBN;
         this.title = title;
         this.editorial = editorial;
         this.author = author;
-        this.loan = loan;
         this.category = category;
-    }
-    /**
-     * Gets the name of the book.
-     *
-     * @return The name of the book.
-     */
-    public String getName() {
-        return name;
     }
     /**
      * Gets the ISBN (unique identifier) of the book.
@@ -73,19 +59,11 @@ public class Book {
         return author;
     }
     /**
-     * Checks the loan status of the book.
-     *
-     * @return True if the book is on loan, false otherwise.
-     */
-    public boolean isLoan() {
-        return loan;
-    }
-    /**
      * Gets the category to which the book belongs.
      *
      * @return The category of the book.
      */
-    public Category getCategory() {
+    public String getCategory() {
         return category;
     }
 
