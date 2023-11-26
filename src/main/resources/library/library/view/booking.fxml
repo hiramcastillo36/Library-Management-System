@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="booking" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.library.booking.bookingController">
+   <children>
+      <TableView fx:id="table" layoutX="69.0" layoutY="67.0" prefHeight="178.0" prefWidth="463.0">
+        <columns>
+          <TableColumn fx:id="isbnColumn" prefWidth="49.0" text="ISBN" />
+          <TableColumn fx:id="titleColumn" prefWidth="101.0" text="Titulo" />
+            <TableColumn fx:id="yearColumn" prefWidth="205.0" text="Año publicacion" />
+            <TableColumn fx:id="floorColumn" prefWidth="45.0" text="Piso" />
+            <TableColumn fx:id="shelfColumn" prefWidth="62.0" text="Estante" />
+        </columns>
+      </TableView>
+      <Label layoutX="77.0" layoutY="31.0" prefHeight="17.0" prefWidth="85.0" text="Buscar libro" />
+      <TextField layoutX="177.0" layoutY="27.0" prefHeight="25.0" prefWidth="355.0" />
+   </children>
+</AnchorPane>
