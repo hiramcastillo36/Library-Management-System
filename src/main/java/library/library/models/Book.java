@@ -4,17 +4,19 @@ package library.library.models;
  */
 public class Book {
 
-    private String name;
-    private int ISBN;
-    private String title;
-    private String editorial;
-    private String author;
-    private boolean loan;
-    private Category category;
+     Integer isbn;
+    String title;
+
+     String year;
+
+     String floor;
+
+     String shelf;
+
+
     /**
      * Constructs a Book object with the specified attributes.
      *
-     * @param name      The name of the book.
      * @param ISBN      The unique identifier (ISBN) for the book.
      * @param title     The title of the book.
      * @param editorial The editorial that published the book.
@@ -22,31 +24,21 @@ public class Book {
      * @param loan      The loan status of the book.
      * @param category  The category to which the book belongs.
      */
-    public Book(String name, int ISBN, String title, String editorial, String author, boolean loan, Category category)
-    {
-        this.name = name;
-        this.ISBN = ISBN;
+    public Book(int ISBN, String title, String year, String floor, String shelf) {
+        this.isbn = ISBN;
         this.title = title;
-        this.editorial = editorial;
-        this.author = author;
-        this.loan = loan;
-        this.category = category;
+        this.year = year;
+        this.floor = floor;
+        this.shelf = shelf;
     }
-    /**
-     * Gets the name of the book.
-     *
-     * @return The name of the book.
-     */
-    public String getName() {
-        return name;
-    }
+
     /**
      * Gets the ISBN (unique identifier) of the book.
      *
      * @return The ISBN of the book.
      */
     public int getISBN() {
-        return ISBN;
+        return isbn;
     }
     /**
      * Gets the title of the book.
@@ -56,37 +48,40 @@ public class Book {
     public String getTitle() {
         return title;
     }
-    /**
-     * Gets the editorial that published the book.
-     *
-     * @return The editorial of the book.
-     */
-    public String getEditorial() {
-        return editorial;
-    }
-    /**
-     * Gets the author(s) of the book.
-     *
-     * @return The author(s) of the book.
-     */
-    public String getAuthor() {
-        return author;
-    }
-    /**
-     * Checks the loan status of the book.
-     *
-     * @return True if the book is on loan, false otherwise.
-     */
-    public boolean isLoan() {
-        return loan;
-    }
-    /**
-     * Gets the category to which the book belongs.
-     *
-     * @return The category of the book.
-     */
-    public Category getCategory() {
-        return category;
+
+    public String getYear() {
+        return year;
     }
 
+    public Integer getIsbn() {
+        return isbn;
+    }
+
+    public String getFloor() {
+        return floor;
+    }
+
+    public String getShelf() {
+        return shelf;
+    }
+
+    public void setIsbn(Integer isbn) {
+        this.isbn = isbn;
+    }
+
+    public void setFloor(String floor) {
+        this.floor = floor;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    public void setShelf(String shelf) {
+        this.shelf = shelf;
+    }
 }
