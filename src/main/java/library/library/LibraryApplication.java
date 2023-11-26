@@ -36,13 +36,13 @@ public class LibraryApplication extends Application {
         }
     }
 
-    public static void signIn(String email, String password) {
+    public static int signIn(String email, String password) {
         int result = session.signIn(email, password);
         if (result == 1) {
-
-            changeScene("Interface");
+            return 1;
         } else {
             System.out.println("Error");
+            return -1;
         }
     }
 

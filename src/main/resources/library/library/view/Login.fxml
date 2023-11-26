@@ -7,9 +7,9 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.library.login.LoginController">
    <children>
-      <Label layoutX="331.0" layoutY="218.0" text="Contraseña:" />
-      <Label layoutX="289.0" layoutY="142.0" text="Correo-electronico:" />
-      <PasswordField fx:id="password" layoutX="403.0" layoutY="214.0" prefHeight="26.0" prefWidth="182.0" promptText="123456">
+      <Label layoutX="327.0" layoutY="215.0" text="Contraseña:" />
+      <Label layoutX="289.0" layoutY="142.0" text="Correo electronico:" />
+      <PasswordField fx:id="password" layoutX="403.0" layoutY="210.0" prefHeight="26.0" prefWidth="182.0" promptText="123456">
          <font>
             <Font size="10.0" />
          </font>
@@ -22,14 +22,17 @@
       </Label>
       <HBox layoutX="26.0" layoutY="39.0" prefHeight="322.0" prefWidth="262.0">
          <children>
-            <ImageView fitHeight="310.0" fitWidth="242.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="img" fitHeight="310.0" fitWidth="242.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assets/UASLP.png" />
                </image>
             </ImageView>
          </children>
       </HBox>
-      <Button fx:id="button" layoutX="419.0" layoutY="269.0" mnemonicParsing="false" onAction="#signIn" prefHeight="42.0" prefWidth="151.0" text="Iniciar sesión" />
-      <Button fx:id="buttonSignUp" layoutX="419.0" layoutY="319.0" mnemonicParsing="false" onAction="#signUp" prefHeight="42.0" prefWidth="151.0" text="Registrarse" />
+      <Button fx:id="button" layoutX="414.0" layoutY="274.0" mnemonicParsing="false" onAction="#signIn" prefHeight="42.0" prefWidth="151.0" text="Iniciar sesión" />
+      <Button fx:id="buttonSignUp" layoutX="444.0" layoutY="326.0" mnemonicParsing="false" onAction="#signUp" prefHeight="17.0" prefWidth="90.0" text="Registrarse" />
+      <Label fx:id="errorEmail" layoutX="432.0" layoutY="172.0" prefHeight="17.0" prefWidth="114.0" textFill="RED" />
+      <Label fx:id="errorPassword" layoutX="432.0" layoutY="243.0" prefHeight="17.0" prefWidth="114.0" textFill="RED" />
+      <Label fx:id="accountNotFound" layoutX="426.0" layoutY="112.0" prefHeight="17.0" prefWidth="126.0" textFill="RED" />
    </children>
 </AnchorPane>
