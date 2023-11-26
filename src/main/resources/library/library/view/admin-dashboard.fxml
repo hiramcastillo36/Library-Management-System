@@ -1,5 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.library.adminDashboard.AdminDashboardController" />
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.library.adminDashboard.AdminDashboardController">
+   <children>
+      <TextField layoutX="69.0" layoutY="119.0" />
+      <TextField layoutX="383.0" layoutY="119.0" />
+       <TableView fx:id="table" layoutX="69.0" layoutY="166.0" prefHeight="108.0" prefWidth="463.0">
+           <columns>
+               <TableColumn fx:id="isbnColumn" prefWidth="49.0" text="ISBN" />
+               <TableColumn fx:id="titleColumn" prefWidth="179.0" text="Titulo" />
+               <TableColumn fx:id="yearColumn" prefWidth="130.0" text="Año publicacion" />
+               <TableColumn fx:id="floorColumn" prefWidth="48.0" text="Piso" />
+               <TableColumn fx:id="shelfColumn" prefWidth="56.0" text="Estante" />
+           </columns>
+       </TableView>
+      <Label layoutX="117.0" layoutY="91.0" text="ISBN libro" />
+      <Label layoutX="410.0" layoutY="91.0" text="Correo de usuario" />
+      <Button layoutX="235.0" layoutY="335.0" mnemonicParsing="false" text="Confirmar devolución" />
+      <Label layoutX="182.0" layoutY="27.0" text="Panel de devoluciones">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
