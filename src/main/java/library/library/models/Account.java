@@ -5,6 +5,7 @@ public class Account {
     private String email;
     private String password;
     private String accountType;
+
     /**
      * Constructs an Account object with the specified email, password, and account type.
      *
@@ -27,6 +28,7 @@ public class Account {
         this.email = email;
         this.accountType = accountType;
     }
+
     /**
      * Gets the email associated with the account.
      *

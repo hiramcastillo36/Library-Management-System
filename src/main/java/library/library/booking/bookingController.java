@@ -1,11 +1,14 @@
 package library.library.booking;
 
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import library.library.controller.DatabaseController;
 import library.library.models.Book;
@@ -13,10 +16,14 @@ import library.library.models.Book;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.util.ResourceBundle;
+import java.util.SortedMap;
 
 public class bookingController implements Initializable {
     @FXML
     private TableView<Book> table = new TableView<>();
+
+    @FXML
+    private TextField searchBar = new TextField();
 
     @FXML
     private TableColumn <Book, Integer> isbnColumn;
@@ -58,7 +65,36 @@ public class bookingController implements Initializable {
             floorColumn.setCellValueFactory(new PropertyValueFactory<>("floor"));
             shelfColumn.setCellValueFactory(new PropertyValueFactory<>("shelf"));
 
-            table.setItems(books);
+            FilteredList<Book> filteredData = new FilteredList<>(books, b -> true);
+
+            searchBar.textProperty().addListener((observable, oldValue, newValue) -> {
+                filteredData.setPredicate(book -> {
+                    if (newValue == null || newValue.isEmpty()) {
+                        return true;
+                    }
+
+                    String lowerCaseFilter = newValue.toLowerCase();
+
+                    if (book.getTitle().toLowerCase().contains(lowerCaseFilter)) {
+                        return true;
+                    } else if (book.getYear().toLowerCase().contains(lowerCaseFilter)) {
+                        return true;
+                    } else if (book.getFloor().toLowerCase().contains(lowerCaseFilter)) {
+                        return true;
+                    } else if (book.getShelf().toLowerCase().contains(lowerCaseFilter)) {
+                        return true;
+                    } else if (book.getIsbn().toString().contains(lowerCaseFilter)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                });
+            });
+
+            SortedList<Book> sortedData = new SortedList<>(filteredData);
+            sortedData.comparatorProperty().bind(table.comparatorProperty());
+            table.setItems(filteredData);
+
         }catch (Exception e) {
             e.printStackTrace();
         }

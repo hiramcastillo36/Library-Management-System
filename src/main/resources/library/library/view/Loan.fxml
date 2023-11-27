@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.library.controller.LoanController">
+   <children>
+      <Label layoutX="34.0" layoutY="14.0" text="Mis préstamos" textFill="#b52c2c">
+         <font>
+            <Font name="Calibri Bold Italic" size="30.0" />
+         </font></Label>
+      <TableView fx:id="loanTable" layoutX="19.0" layoutY="63.0" prefHeight="291.0" prefWidth="563.0">
+         <columns>
+            <TableColumn fx:id="isbnColumn" prefWidth="75.0" text="ISBN" />
+            <TableColumn fx:id="titleColumn" prefWidth="140.0" text="Titulo" />
+            <TableColumn fx:id="editorialColumn" prefWidth="120.0" text="Editorial" />
+            <TableColumn fx:id="authorColumn" prefWidth="120.0" text="Autor" />
+            <TableColumn fx:id="categoryColumn" prefWidth="120.0" text="Categoria" />
+         </columns>
+      </TableView>
+      <TextField fx:id="userIdField" layoutX="42.0" layoutY="368.0" promptText="Enter User ID" />
+   </children>
+</AnchorPane>
