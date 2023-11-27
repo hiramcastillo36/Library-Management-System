@@ -20,7 +20,7 @@
          </font>
       </PasswordField>
       <TextField fx:id="email" layoutX="403.0" layoutY="138.0" prefHeight="26.0" prefWidth="182.0" promptText="a123456@alumnos.uaslp.mx" />
-      <Label layoutX="426.0" layoutY="54.0" prefHeight="50.0" prefWidth="126.0" text="Inicio de sesión">
+      <Label contentDisplay="CENTER" layoutX="434.0" layoutY="62.0" prefHeight="50.0" prefWidth="120.0" text="Inicio de sesión" textAlignment="JUSTIFY">
          <font>
             <Font size="18.0" />
          </font>
