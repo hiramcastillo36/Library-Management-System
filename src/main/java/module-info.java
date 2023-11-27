@@ -16,9 +16,14 @@ module library.library {
     exports library.library.login;
     exports library.library.AccountInterface;
     exports library.library.AdminInterface;
+    exports library.library.adminDashboard;
+    exports library.library.models;
+
     opens library.library.controller to javafx.fxml;
     opens library.library.homePage;
     opens library.library.login;
     opens library.library.AccountInterface;
     opens library.library.AdminInterface;
+    opens library.library.adminDashboard;
+    opens library.library.booking;
 }
