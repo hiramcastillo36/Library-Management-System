@@ -9,6 +9,8 @@ import library.library.util.Sessions;
 import java.io.IOException;
 import java.sql.SQLException;
 
+
+
 public class LibraryApplication extends Application {
     private static Sessions sessions = new Sessions();
 
@@ -18,7 +20,7 @@ public class LibraryApplication extends Application {
     public void start(Stage stage) throws IOException {
         this.stage = stage;
         stage.setTitle("Library");
-        Parent root = FXMLLoader.load(getClass().getResource("view/login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("view/AdminInterface.fxml"));
         stage.setTitle("Library");
         stage.setScene(new Scene(root, 600, 400));
         stage.show();
