@@ -1,8 +1,6 @@
 package library.library.controller;
 
 import library.library.LibraryApplication;
-import library.library.models.Account;
-
 import java.sql.*;
 import java.util.logging.Logger;
 
@@ -27,28 +25,6 @@ public class DatabaseController {
         return connection;
     }
 
-    public static void getAutores() throws SQLException {
-        String query = "SELECT * FROM " + "Autores";
-        PreparedStatement statement = getConnection().prepareStatement(query);
-        ResultSet rs = statement.executeQuery();
-        while (rs.next()) {
-            System.out.println(rs.getString("ISBN"));
-        }
-    }
-
-    public static void getAccountData() throws SQLException{
-        String query = "SELECT correo_electronico, contraseña, tipo_usuario FROM Cuenta";
-        PreparedStatement statement = getConnection().prepareStatement(query);
-        ResultSet rs = statement.executeQuery();
-        while(rs.next())
-        {
-            System.out.println(rs.getString("correo_electronico")) ;
-            System.out.println(rs.getString("contraseña"));
-            System.out.println(rs.getString("tipo_usuario"));
-
-        }
-    }
-
     public static ResultSet executeQuery(String query) throws SQLException {
         PreparedStatement statement = getConnection().prepareStatement(query);
         return statement.executeQuery();
@@ -59,13 +35,13 @@ public class DatabaseController {
         statement.executeUpdate();
     }
 
-    public static void executeInsert(String query) throws SQLException {
-        PreparedStatement statement = getConnection().prepareStatement(query);
-        statement.execute();
+    public static void executeInsert(PreparedStatement statement) throws SQLException {
+        statement.executeUpdate();
     }
 
     public static void closeConnection() throws SQLException {
         if (connection != null) {
+            LOGGER.info("Closing database connection...");
             connection.close();
         }
     }

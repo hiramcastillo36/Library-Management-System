@@ -5,7 +5,7 @@ import java.io.InputStream;
 import java.util.Properties;
 public class SqlSentences {
     private static final String FILENAME = "database/SQL.properties";
-    private Properties properties;
+    private static Properties properties;
 
     public SqlSentences() {
         properties = new Properties();
