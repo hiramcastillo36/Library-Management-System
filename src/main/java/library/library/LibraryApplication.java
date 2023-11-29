@@ -8,9 +8,6 @@ import javafx.stage.Stage;
 import library.library.models.Account;
 import library.library.util.Session;
 import java.io.IOException;
-import java.sql.SQLException;
-
-
 
 public class LibraryApplication extends Application {
     private static Session session = new Session();
