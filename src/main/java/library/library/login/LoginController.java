@@ -51,8 +51,13 @@ public class LoginController {
             accountNotFound.setText("Cuenta no encontrada");
         else if (result == 0)
             errorPassword.setText("Contraseña incorrecta");
-        else if (result == 1)
-            LibraryApplication.changeScene("Interface");
+        else if (result == 1){
+            String accountType = LibraryApplication.getSession().getAccountType();
+            if(accountType.equals("Estudiante"))
+                LibraryApplication.changeScene("Interface");
+            else if(accountType.equals("Admin"))
+                LibraryApplication.changeScene("admin-dashboard");
+        }
     }
     private boolean validateInput() {
         if (email.getText().isEmpty() || password.getText().isEmpty()) {
@@ -74,14 +79,20 @@ public class LoginController {
     protected void signUp() {
         System.out.println("Email: " + email.getText());
         System.out.println("Password: " + password.getText());
+
         if(validateInput())
             return;
 
         int result = LibraryApplication.signUp(email.getText(), password.getText());
         if(result == 0)
             errorEmail.setText("Email ya existe");
-        else if(result == 1)
-            LibraryApplication.changeScene("Interface");
+        else if(result == 1){
+            String accountType = LibraryApplication.getSession().getAccountType();
+            if(accountType.equals("Usuario"))
+                LibraryApplication.changeScene("Interface");
+            else if(accountType.equals("Admin"))
+                LibraryApplication.changeScene("admin-dashboard");
+        }
     }
 
     @FXML

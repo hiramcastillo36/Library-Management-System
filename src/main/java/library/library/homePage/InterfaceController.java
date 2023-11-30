@@ -72,7 +72,16 @@ public class InterfaceController
                     break;
 
                 case "Mis Libros":
-                    System.out.println("mis libross");
+                    try {
+                        FXMLLoader loader = new FXMLLoader(LibraryApplication.class.getResource("view/Loan.fxml"));
+                        Scene newScene = new Scene(loader.load());
+
+                        Stage currentStage = (Stage) dropdown.getScene().getWindow();
+                        currentStage.setScene(newScene);
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     break;
 
                 case "Cerrar Sesión":
