@@ -95,7 +95,6 @@ public class InterfaceController
     @javafx.fxml.FXML
     public void initialize() {
         ObservableList<String> list;
-        System.out.println(LibraryApplication.getSession());
         if(LibraryApplication.getSession() == null) {
             signin.setVisible(true);
             dropdown.setVisible(false);

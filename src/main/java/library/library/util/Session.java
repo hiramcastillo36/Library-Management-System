@@ -25,16 +25,12 @@ public class Session {
             if (rs.next()) {
                 String hashPassword = rs.getString("contraseña");
                 if (PasswordHash.validatePassword(password, hashPassword)) {
-                    System.out.println("Signed in");
                     currentUser = new Account(email, rs.getString("tipo_usuario"));
-                    System.out.println(currentUser.getAccountType());
                     return 1;
                 } else {
-                    System.out.println("Wrong password");
                     return 0;
                 }
             } else {
-                System.out.println("Email doesn't exist");
                 return -1;
             }
         }catch (SQLException e) {
@@ -52,7 +48,6 @@ public class Session {
         try {
             rs = DatabaseController.executeQuery("SELECT * FROM Cuenta WHERE correo_electronico = '" + email + "'");
             if (rs.next()) {
-                System.out.println("Email already exists");
                 return 0;
             } else {
                 String hashPassword = PasswordHash.createHash(password);

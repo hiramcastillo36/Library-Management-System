@@ -34,20 +34,9 @@ public class DatabaseController {
         return statement.executeQuery();
     }
 
-    public static void executeUpdate(String query) throws SQLException {
-        PreparedStatement statement = getConnection().prepareStatement(query);
-        statement.executeUpdate();
-    }
+
 
     public static void executeInsert(PreparedStatement statement) throws SQLException {
         statement.executeUpdate();
     }
-
-    public static void closeConnection() throws SQLException {
-        if (connection != null) {
-            LOGGER.info("Closing database connection...");
-            connection.close();
-        }
-    }
-
 }

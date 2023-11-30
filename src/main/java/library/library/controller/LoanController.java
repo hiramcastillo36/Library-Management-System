@@ -35,30 +35,7 @@ public class LoanController implements Initializable {
     private Text back;
 
     @FXML
-    private TableView<Book> loanTable;
-
-    @FXML
-    private TableColumn<Book, Integer> isbnColumn;
-
-    @FXML
-    private TableColumn<Book, String> titleColumn;
-
-    @FXML
-    private TableColumn<Book, String> yearColumn;
-
-    @FXML
-    private TableColumn<Book, String> floorColumn;
-
-    @FXML
-    private TableColumn<Book, String> shelfColumn;
-
-    @FXML
-    private TextField searchField;
-
-    @FXML
     private VBox container;
-
-    private ObservableList<Book> books = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -69,8 +46,6 @@ public class LoanController implements Initializable {
             ResultSet st;
             st = DatabaseController.executeQuery("SELECT * FROM estudiantes WHERE correo_electronico = '" + query + "'");
             if(st.next()){
-                System.out.println("Estudiante");
-                System.out.println(st.getString("Clave_Usuario"));
                 rs = DatabaseController.executeQuery("SELECT * FROM Autores\n" +
                         "INNER JOIN main.LIBRO L on L.ISBN = Autores.ISBN\n" +
                         "INNER JOIN main.PRESTAMO P on L.ISBN = P.ISBN\n" +
@@ -78,8 +53,6 @@ public class LoanController implements Initializable {
                 );
 
                 while (rs.next()) {
-                    System.out.println(rs.getString("Titulo"));
-                    System.out.println(rs.getString("NombreAutor"));
                     AnchorPane anchorPane = createDataAnchorPane(rs.getString("Titulo"), rs.getString("NombreAutor"), rs.getString("ISBN"));
                     container.getChildren().add(anchorPane);
                 }
