@@ -5,7 +5,7 @@ package library.library.models;
 public class Book {
 
 
-     Integer isbn;
+     String isbn;
      
      String title;
 
@@ -27,7 +27,7 @@ public class Book {
      * @param shelf     The shelf where the book is placed on the floor.
      */
 
-    public Book(int ISBN, String title, String year, String floor, String shelf) {
+    public Book(String ISBN, String title, String year, String floor, String shelf) {
         this.isbn = ISBN;
         this.title = title;
         this.year = year;
@@ -41,7 +41,7 @@ public class Book {
      *
      * @return The ISBN of the book.
      */
-    public int getISBN() {
+    public String getISBN() {
         return isbn;
     }
     /**
@@ -57,7 +57,7 @@ public class Book {
         return year;
     }
 
-    public Integer getIsbn() {
+    public String getIsbn() {
         return isbn;
     }
 
@@ -69,7 +69,7 @@ public class Book {
         return shelf;
     }
 
-    public void setIsbn(Integer isbn) {
+    public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
 

@@ -43,7 +43,7 @@ public class ViewBooksController {
         }catch (Exception e) {
             e.printStackTrace();
         }
-        // Crear AnchorPane dinámicamente para cada libro y agregarlos al VBox
+
     }
 
     private AnchorPane createDataAnchorPane(String title, String author, String isbn, String clave_usuario) {
@@ -51,8 +51,6 @@ public class ViewBooksController {
         anchorPane.setPrefHeight(38.0);
         anchorPane.setPrefWidth(446.0);
         anchorPane.setStyle("-fx-background-color: lightgray; -fx-border-color: darkgray;");
-
-        // Puedes configurar un evento para el botón de eliminar aquí
 
         Label labelLibro = new Label(title);
         labelLibro.setLayoutX(14.0);

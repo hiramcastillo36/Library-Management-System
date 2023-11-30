@@ -50,7 +50,7 @@ public class bookingController implements Initializable {
         try {
             rs = DatabaseController.executeQuery("SELECT * FROM Libro");
             while (rs.next()) {
-                Integer isbn = rs.getInt("ISBN");
+                String isbn = rs.getString("ISBN");
                 String title = rs.getString("Titulo");
                 String year = rs.getString("A_publicacion");
                 String floor = rs.getString("Piso");
