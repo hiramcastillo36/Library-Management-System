@@ -64,7 +64,6 @@ public class AdminDashboardController {
 
             bookings.clear();
             if (rs.next()) {
-                System.out.println("Encontrado");
                 booking = new Booking(  rs.getString("ISBN"),
                                         rs.getInt("Clave_Usuario"),
                                         rs.getString("NSS"),
@@ -75,7 +74,6 @@ public class AdminDashboardController {
                 confirm.setDisable(false);
                 bookings.add(booking);
             } else {
-                System.out.println("No encontrado");
                 confirm.setDisable(false);
                 booking = null;
             }
@@ -102,10 +100,6 @@ public class AdminDashboardController {
     }
 
     public void confirmBooking(ActionEvent actionEvent) {
-        if(this.booking == null){
-            System.out.println("No hay un prestamo encontrado");
-            return;
-        } else {
             try {
                 String deleteBooking = "DELETE FROM PRESTAMO WHERE ISBN = ? AND Clave_Usuario = ?";
                 PreparedStatement statement = DatabaseController.getConnection().prepareStatement(deleteBooking);
@@ -120,6 +114,5 @@ public class AdminDashboardController {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
     }
 }
