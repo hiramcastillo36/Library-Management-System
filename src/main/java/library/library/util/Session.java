@@ -25,16 +25,13 @@ public class Session {
             if (rs.next()) {
                 String hashPassword = rs.getString("contraseña");
                 if (PasswordHash.validatePassword(password, hashPassword)) {
-                    System.out.println("Signed in");
                     currentUser = new Account(email, rs.getString("tipo_usuario"));
                     System.out.println(currentUser.getAccountType());
                     return 1;
                 } else {
-                    System.out.println("Wrong password");
                     return 0;
                 }
             } else {
-                System.out.println("Email doesn't exist");
                 return -1;
             }
         }catch (SQLException e) {

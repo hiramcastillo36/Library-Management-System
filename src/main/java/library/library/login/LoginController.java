@@ -61,7 +61,6 @@ public class LoginController {
     }
     private boolean validateInput() {
         if (email.getText().isEmpty() || password.getText().isEmpty()) {
-            System.out.println("Email or password is empty");
             if(email.getText().isEmpty())
                 errorEmail.setText("No puede estar vacío");
             if (password.getText().isEmpty()) {
