@@ -53,7 +53,7 @@ public class LoginController {
             errorPassword.setText("Contraseña incorrecta");
         else if (result == 1){
             String accountType = LibraryApplication.getSession().getAccountType();
-            if(accountType.equals("Usuario"))
+            if(accountType.equals("Estudiante"))
                 LibraryApplication.changeScene("Interface");
             else if(accountType.equals("Admin"))
                 LibraryApplication.changeScene("admin-dashboard");

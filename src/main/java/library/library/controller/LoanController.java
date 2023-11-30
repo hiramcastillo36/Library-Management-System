@@ -1,104 +1,132 @@
 package library.library.controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import library.library.LibraryApplication;
+import library.library.models.Account;
 import library.library.models.Book;
-import library.library.models.Category;
+import library.library.models.Student;
+import javafx.fxml.Initializable;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+import java.io.IOException;
+import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
-public class LoanController {
+public class LoanController implements Initializable {
+
+    @FXML
+    private Text back;
 
     @FXML
     private TableView<Book> loanTable;
 
     @FXML
-    private TableColumn<Book, String> isbnColumn;
+    private TableColumn<Book, Integer> isbnColumn;
 
     @FXML
     private TableColumn<Book, String> titleColumn;
 
     @FXML
-    private TableColumn<Book, String> editorialColumn;
+    private TableColumn<Book, String> yearColumn;
 
     @FXML
-    private TableColumn<Book, String> authorColumn;
+    private TableColumn<Book, String> floorColumn;
 
     @FXML
-    private TableColumn<Book, String> loanColumn;
+    private TableColumn<Book, String> shelfColumn;
 
     @FXML
-    private TableColumn<Book, String> categoryColumn;
+    private TextField searchField;
 
     @FXML
-    private TextField userIdField;
+    private VBox container;
 
-    // Método de inicialización de la clase de controlador
-    @FXML
-    private void initialize() {
-        // Configurar las columnas de la tabla
-        isbnColumn.setCellValueFactory(new PropertyValueFactory<>("ISBN"));
-        titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
-        editorialColumn.setCellValueFactory(new PropertyValueFactory<>("editorial"));
-        authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
-        categoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
+    private ObservableList<Book> books = FXCollections.observableArrayList();
 
-        // Llenar la tabla con los libros prestados del usuario
-        populateLoanTable();
-    }
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
 
-    // Método para llenar la tabla con los libros prestados del usuario
-    private void populateLoanTable() {
-        // Establecer la conexión con la base de datos SQLite
-        try (Connection connection = DatabaseController.getConnection()) {
-            String query = "SELECT * FROM LIBRO WHERE clave_usuario = clave_usuario";
+        ResultSet rs = null;
+        try {
+            String query = LibraryApplication.getSession().getEmail();
+            ResultSet st;
+            st = DatabaseController.executeQuery("SELECT * FROM estudiantes WHERE correo_electronico = '" + query + "'");
+            if(st.next()){
+                System.out.println("Estudiante");
+                System.out.println(st.getString("Clave_Usuario"));
+                rs = DatabaseController.executeQuery("SELECT * FROM Autores\n" +
+                        "INNER JOIN main.LIBRO L on L.ISBN = Autores.ISBN\n" +
+                        "INNER JOIN main.PRESTAMO P on L.ISBN = P.ISBN\n" +
+                        "WHERE P.Clave_Usuario = " + st.getString("Clave_Usuario")
+                );
 
-            // Preparar la consulta
-            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-                // Configurar el parámetro del usuario
-                int userId = obtenerIdUsuarioDesdeTextField();
-                preparedStatement.setInt(1, userId);
-
-                // Ejecutar la consulta
-                try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                    // Limpiar la tabla antes de agregar nuevos datos
-                    loanTable.getItems().clear();
-
-                    // Llenar la tabla con los resultados de la consulta
-                    while (resultSet.next()) {
-                        int ISBN = Integer.parseInt(resultSet.getString("ISBN"));
-                        String title = resultSet.getString("title");
-                        String editorial = resultSet.getString("editorial");
-                        String author = resultSet.getString("author");
-                        String category = resultSet.getString("category");
-
-                        Book book = new Book(ISBN, title, editorial, author, category);
-                        loanTable.getItems().add(book);
-                    }
+                while (rs.next()) {
+                    System.out.println(rs.getString("Titulo"));
+                    System.out.println(rs.getString("NombreAutor"));
+                    AnchorPane anchorPane = createDataAnchorPane(rs.getString("Titulo"), rs.getString("NombreAutor"), rs.getString("ISBN"));
+                    container.getChildren().add(anchorPane);
                 }
             }
-        } catch (SQLException e) {
+        }catch (Exception e) {
             e.printStackTrace();
         }
+        // Crear AnchorPane dinámicamente para cada libro y agregarlos al VBox
     }
 
-    // Método para obtener el ID del usuario desde el TextField (ejemplo)
-    private int obtenerIdUsuarioDesdeTextField() {
+    private AnchorPane createDataAnchorPane(String title, String author, String isbn) {
+        AnchorPane anchorPane = new AnchorPane();
+        anchorPane.setPrefHeight(38.0);
+        anchorPane.setPrefWidth(446.0);
+        anchorPane.setStyle("-fx-background-color: lightgray; -fx-border-color: darkgray;");
+
+        // Puedes configurar un evento para el botón de eliminar aquí
+
+        Label labelLibro = new Label(title);
+        labelLibro.setLayoutX(14.0);
+        labelLibro.setLayoutY(10.0);
+
+        Label labelAutor = new Label(author);
+        labelAutor.setLayoutX(200.0);
+        labelAutor.setLayoutY(10.0);
+
+        Label labelISBN = new Label(isbn);
+        labelISBN.setLayoutX(300.0);
+        labelISBN.setLayoutY(10.0);
+
+        anchorPane.getChildren().addAll(labelLibro, labelAutor, labelISBN);
+
+        return anchorPane;
+    }
+
+    @FXML
+    void goBack(MouseEvent event) {
         try {
-            // Convertir el texto del TextField a un entero
-            return Integer.parseInt(userIdField.getText());
-        } catch (NumberFormatException e) {
-            // Manejar la excepción si el texto no es un número
+            // Cargar la nueva escena (en este caso, la escena anterior)
+            FXMLLoader loader = new FXMLLoader(LibraryApplication.class.getResource("view/Interface.fxml"));
+            Scene previousScene = new Scene(loader.load());
+
+            // Obtener el Stage actual y cambiar su escena
+            Stage currentStage = (Stage) back.getScene().getWindow();
+            currentStage.setScene(previousScene);
+        } catch (IOException e) {
             e.printStackTrace();
-            return 0;
         }
     }
-
 }
