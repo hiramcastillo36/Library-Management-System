@@ -4,8 +4,8 @@ package library.library.models;
  */
 public class Category {
 
-    private int id;
-    private String name;
+    private final int id;
+    private final String name;
     /**
      * Constructs a Category object with the specified identifier and name.
      *

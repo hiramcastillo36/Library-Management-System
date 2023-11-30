@@ -4,11 +4,11 @@ import java.util.Date;
  * Represents an employee in the library.
  */
 public class Employee {
-    private String firstName;
-    private String lastName;
-    private String secondLastName;
-    private String NSS;
-    private Date initDate;
+    private final String firstName;
+    private final String lastName;
+    private final String secondLastName;
+    private final String NSS;
+    private final Date initDate;
     /**
      * Constructs an Employer object with the specified attributes.
      *

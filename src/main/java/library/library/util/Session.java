@@ -13,7 +13,7 @@ import java.sql.SQLException;
 public class Session {
 
     private Account currentUser = null;
-    private SqlSentences sqlSentences = new SqlSentences();
+    private final SqlSentences sqlSentences = new SqlSentences();
 
     public int signIn(String email, String password) {
         // -1: Email doesn't exist

@@ -3,9 +3,9 @@ package library.library.models;
  * Represents an author of books.
  */
 public class Author {
-    private int ISBN;
-    private String name;
-    private String lastName;
+    private final int ISBN;
+    private final String name;
+    private final String lastName;
     /**
      * Constructs an Author object with the specified ISBN, name, and last name.
      *
