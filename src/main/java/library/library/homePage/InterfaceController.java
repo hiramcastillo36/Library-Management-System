@@ -31,7 +31,7 @@ public class InterfaceController
     private TextField searchBar = new TextField();
 
     @FXML
-    private TableColumn<Book, Integer> isbnColumn;
+    private TableColumn<Book, String> isbnColumn;
 
     @FXML
     private TableColumn <Book, String> titleColumn;
@@ -110,7 +110,7 @@ public class InterfaceController
         try {
             rs = DatabaseController.executeQuery("SELECT * FROM Libro");
             while (rs.next()) {
-                Integer isbn = rs.getInt("ISBN");
+                String isbn = rs.getString("ISBN");
                 String title = rs.getString("Titulo");
                 String year = rs.getString("A_publicacion");
                 String floor = rs.getString("Piso");
