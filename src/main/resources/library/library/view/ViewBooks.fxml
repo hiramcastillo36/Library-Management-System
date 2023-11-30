@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.library.controller.ViewBooksController">
+    <children>
+        <TableView fx:id="loanTable" layoutX="42.0" layoutY="126.0" prefHeight="260.0" prefWidth="480.0">
+            <columns>
+                <TableColumn fx:id="isbnColumn" prefWidth="75.0" text="ISBN" />
+                <TableColumn fx:id="titleColumn" prefWidth="180.0" text="Título" />
+                <TableColumn fx:id="yearColumn" prefWidth="75.0" text="Año" />
+                <TableColumn fx:id="floorColumn" prefWidth="75.0" text="Piso" />
+                <TableColumn fx:id="shelfColumn" prefWidth="75.0" text="Estante" />
+            </columns>
+        </TableView>
+        <TextField fx:id="searchField" layoutX="42.0" layoutY="80.0" prefHeight="26.0" prefWidth="408.0" promptText="Busca por Título" />
+      <Label layoutX="42.0" layoutY="34.0" text="Libros Prestados" textFill="#bf2d2d">
+         <font>
+            <Font name="Calibri Bold Italic" size="30.0" />
+         </font>
+      </Label>
+    </children>
+</AnchorPane>

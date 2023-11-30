@@ -22,9 +22,9 @@ public class Book {
      *
      * @param ISBN      The unique identifier (ISBN) for the book.
      * @param title     The title of the book.
-     * @param editorial The editorial that published the book.
-     * @param author    The author(s) of the book.
-     * @param category  The category to which the book belongs.
+     * @param year      The publication year of the book.
+     * @param floor     The floor where the book is located in the library.
+     * @param shelf     The shelf where the book is placed on the floor.
      */
 
     public Book(int ISBN, String title, String year, String floor, String shelf) {

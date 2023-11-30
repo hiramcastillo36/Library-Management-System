@@ -9,14 +9,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import library.library.LibraryApplication;
-import library.library.models.Account;
 import library.library.models.Book;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class LoanController {
+public class ViewBooksController {
 
     @FXML
     private TableView<Book> loanTable;
@@ -39,12 +37,14 @@ public class LoanController {
     @FXML
     private TextField searchField;
 
-    private ObservableList<Book> books = FXCollections.observableArrayList();
+    private final ObservableList<Book> books = FXCollections.observableArrayList();
 
     @FXML
     private void initialize() {
         try {
-            ResultSet rs = DatabaseController.executeQuery("SELECT * FROM Libro");
+            ResultSet rs = DatabaseController.executeQuery("SELECT * FROM Autores\n" +
+                    "INNER JOIN main.LIBRO L on L.ISBN = Autores.ISBN\n" +
+                    "INNER JOIN main.PRESTAMO P on L.ISBN = P.ISBN;");
             while (rs.next()) {
                 Integer isbn = rs.getInt("ISBN");
                 String title = rs.getString("Titulo");

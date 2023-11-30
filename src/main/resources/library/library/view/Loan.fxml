@@ -9,16 +9,17 @@
       <Label layoutX="34.0" layoutY="14.0" text="Mis préstamos" textFill="#b52c2c">
          <font>
             <Font name="Calibri Bold Italic" size="30.0" />
-         </font></Label>
+         </font>
+      </Label>
       <TableView fx:id="loanTable" layoutX="19.0" layoutY="63.0" prefHeight="291.0" prefWidth="563.0">
          <columns>
             <TableColumn fx:id="isbnColumn" prefWidth="75.0" text="ISBN" />
             <TableColumn fx:id="titleColumn" prefWidth="140.0" text="Titulo" />
-            <TableColumn fx:id="editorialColumn" prefWidth="120.0" text="Editorial" />
-            <TableColumn fx:id="authorColumn" prefWidth="120.0" text="Autor" />
-            <TableColumn fx:id="categoryColumn" prefWidth="120.0" text="Categoria" />
+            <TableColumn fx:id="yearColumn" prefWidth="120.0" text="Año" />
+            <TableColumn fx:id="floorColumn" prefWidth="120.0" text="Piso" />
+            <TableColumn fx:id="shelfColumn" prefWidth="120.0" text="Estante" />
          </columns>
       </TableView>
-      <TextField fx:id="userIdField" layoutX="42.0" layoutY="368.0" promptText="Enter User ID" />
+      <TextField fx:id="searchField" layoutX="42.0" layoutY="368.0" promptText="Título o Autor" />
    </children>
 </AnchorPane>
