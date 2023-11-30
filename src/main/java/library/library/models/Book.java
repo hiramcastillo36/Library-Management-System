@@ -4,7 +4,6 @@ package library.library.models;
  */
 public class Book {
 
-
      String isbn;
      
      String title;
@@ -14,8 +13,6 @@ public class Book {
      String floor;
 
      String shelf;
-
-
 
     /**
      * Constructs a Book object with the specified attributes.

@@ -22,8 +22,6 @@ public class ViewBooksController {
     @FXML
     private TextField searchField;
 
-    private final ObservableList<Book> books = FXCollections.observableArrayList();
-
     @FXML
     private void initialize() {
         ResultSet rs = null;
