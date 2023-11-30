@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.library.AdminInterface.AdminInterfaceController">
    <children>
-      <Button fx:id="addBook" layoutX="470.0" layoutY="33.0" mnemonicParsing="false" text="Agregar Libro" />
+      <Button fx:id="addBook" layoutX="470.0" layoutY="33.0" onMouseClicked="#askBook" mnemonicParsing="false" text="Agregar Libro" />
       <ScrollPane layoutX="40.0" layoutY="75.0" prefHeight="290.0" prefWidth="531.0">
          <content>
             <VBox fx:id="container" prefHeight="287.0" prefWidth="516.0">
