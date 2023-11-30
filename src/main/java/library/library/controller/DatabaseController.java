@@ -30,6 +30,10 @@ public class DatabaseController {
         return statement.executeQuery();
     }
 
+    public static ResultSet executeQuery(PreparedStatement statement) throws SQLException {
+        return statement.executeQuery();
+    }
+
     public static void executeUpdate(String query) throws SQLException {
         PreparedStatement statement = getConnection().prepareStatement(query);
         statement.executeUpdate();
