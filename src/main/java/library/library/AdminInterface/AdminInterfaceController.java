@@ -44,7 +44,6 @@ public class AdminInterfaceController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ResultSet rs = null;
-
        try {
             rs = DatabaseController.executeQuery("SELECT * FROM Libro");
             while (rs.next()) {
@@ -125,7 +124,7 @@ public class AdminInterfaceController implements Initializable {
             Stage currentStage = (Stage) back.getScene().getWindow();
             currentStage.setScene(previousScene);
         } catch (IOException e) {
-            e.printStackTrace(); // Manejo básico de excepciones, ajusta según sea necesario
+            e.printStackTrace();
         }
     }
 
@@ -139,7 +138,7 @@ public class AdminInterfaceController implements Initializable {
             Stage currentStage = (Stage) back.getScene().getWindow();
             currentStage.setScene(previousScene);
         } catch (IOException e) {
-            e.printStackTrace(); // Manejo básico de excepciones, ajusta según sea necesario
+            e.printStackTrace();
         }
     }
 }

@@ -45,7 +45,7 @@ public class addBookController {
             Stage currentStage = (Stage) back.getScene().getWindow();
             currentStage.setScene(previousScene);
         } catch (IOException e) {
-            e.printStackTrace(); // Manejo básico de excepciones, ajusta según sea necesario
+            e.printStackTrace();
         }
     }
 
@@ -59,7 +59,7 @@ public class addBookController {
             Stage currentStage = (Stage) back.getScene().getWindow();
             currentStage.setScene(previousScene);
         } catch (IOException e) {
-            e.printStackTrace(); // Manejo básico de excepciones, ajusta según sea necesario
+            e.printStackTrace();
         }
     }
 }
