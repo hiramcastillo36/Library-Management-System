@@ -6,24 +6,25 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.library.adminDashboard.AdminDashboardController">
    <children>
-      <TextField layoutX="69.0" layoutY="119.0" />
-      <TextField layoutX="383.0" layoutY="119.0" />
-       <TableView fx:id="table" layoutX="69.0" layoutY="166.0" prefHeight="108.0" prefWidth="463.0">
+      <TextField fx:id="isbnBook" layoutX="69.0" layoutY="119.0" />
+      <TextField fx:id="studentEmail" layoutX="383.0" layoutY="119.0" />
+       <TableView fx:id="tableBooking" layoutX="69.0" layoutY="166.0" prefHeight="108.0" prefWidth="463.0">
            <columns>
-               <TableColumn fx:id="isbnColumn" prefWidth="49.0" text="ISBN" />
-               <TableColumn fx:id="titleColumn" prefWidth="179.0" text="Titulo" />
-               <TableColumn fx:id="yearColumn" prefWidth="130.0" text="Año publicacion" />
-               <TableColumn fx:id="floorColumn" prefWidth="48.0" text="Piso" />
-               <TableColumn fx:id="shelfColumn" prefWidth="56.0" text="Estante" />
+               <TableColumn fx:id="isbnColumn" prefWidth="83.0" text="ISBN" />
+               <TableColumn fx:id="userColumn" prefWidth="194.0" text="Clave Usuario" />
+               <TableColumn fx:id="dateColumn" prefWidth="185.0" text="Fecha de prestamo" />
            </columns>
        </TableView>
       <Label layoutX="117.0" layoutY="91.0" text="ISBN libro" />
-      <Label layoutX="410.0" layoutY="91.0" text="Correo de usuario" />
-      <Button layoutX="235.0" layoutY="335.0" mnemonicParsing="false" text="Confirmar devolución" />
+      <Label layoutX="410.0" layoutY="91.0" text="Clave de usuario" />
+      <Button fx:id="confirm" disable="true" layoutX="354.0" layoutY="317.0" mnemonicParsing="false" onAction="#confirmBooking" text="Confirmar devolución" />
       <Label layoutX="182.0" layoutY="27.0" text="Panel de devoluciones">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
+      <Button fx:id="searchBook" layoutX="117.0" layoutY="317.0" mnemonicParsing="false" onAction="#searchBook" text="Buscar libro" />
+      <Label fx:id="studentEmailError" layoutX="396.0" layoutY="144.0" prefHeight="17.0" prefWidth="123.0" textFill="RED" />
+      <Label fx:id="isbnError" layoutX="82.0" layoutY="144.0" prefHeight="17.0" prefWidth="123.0" textFill="RED" />
    </children>
 </AnchorPane>
