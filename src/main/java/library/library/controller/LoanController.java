@@ -46,7 +46,6 @@ public class LoanController implements Initializable {
             ResultSet st;
             st = DatabaseController.executeQuery("SELECT * FROM estudiantes WHERE correo_electronico = '" + query + "'");
             if(st.next()){
-                System.out.println(st.getString("Clave_Usuario"));
                 rs = DatabaseController.executeQuery("SELECT * FROM Autores\n" +
                         "INNER JOIN main.LIBRO L on L.ISBN = Autores.ISBN\n" +
                         "INNER JOIN main.PRESTAMO P on L.ISBN = P.ISBN\n" +
@@ -54,8 +53,6 @@ public class LoanController implements Initializable {
                 );
 
                 while (rs.next()) {
-                    System.out.println(rs.getString("Titulo"));
-                    System.out.println(rs.getString("NombreAutor"));
                     AnchorPane anchorPane = createDataAnchorPane(rs.getString("Titulo"), rs.getString("NombreAutor"), rs.getString("ISBN"));
                     container.getChildren().add(anchorPane);
                 }

@@ -58,8 +58,6 @@ public class AdminDashboardController {
             PreparedStatement statement = DatabaseController.getConnection().prepareStatement(fetchBooking);
             statement.setString(1, isbnBook.getText());
             statement.setString(2, studentEmail.getText());
-            System.out.println(isbnBook.getText());
-            System.out.println(studentEmail.getText());
             ResultSet rs = DatabaseController.executeQuery(statement);
 
             bookings.clear();

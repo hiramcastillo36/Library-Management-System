@@ -76,8 +76,6 @@ public class LoginController {
 
     @FXML
     protected void signUp() {
-        System.out.println("Email: " + email.getText());
-        System.out.println("Password: " + password.getText());
 
         if(validateInput())
             return;

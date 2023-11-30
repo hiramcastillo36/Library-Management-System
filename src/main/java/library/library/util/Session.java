@@ -26,7 +26,6 @@ public class Session {
                 String hashPassword = rs.getString("contraseña");
                 if (PasswordHash.validatePassword(password, hashPassword)) {
                     currentUser = new Account(email, rs.getString("tipo_usuario"));
-                    System.out.println(currentUser.getAccountType());
                     return 1;
                 } else {
                     return 0;
@@ -49,7 +48,6 @@ public class Session {
         try {
             rs = DatabaseController.executeQuery("SELECT * FROM Cuenta WHERE correo_electronico = '" + email + "'");
             if (rs.next()) {
-                System.out.println("Email already exists");
                 return 0;
             } else {
                 String hashPassword = PasswordHash.createHash(password);
