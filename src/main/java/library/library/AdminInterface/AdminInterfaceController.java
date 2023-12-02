@@ -39,7 +39,7 @@ public class AdminInterfaceController implements Initializable {
     private VBox container;
 
     // Supongamos que tienes una lista de libros en tu controlador
-    private List<Book> listaLibros = new ArrayList<>();;
+    private final List<Book> listaLibros = new ArrayList<>();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

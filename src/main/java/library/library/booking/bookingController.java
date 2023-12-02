@@ -83,11 +83,7 @@ public class bookingController implements Initializable {
                         return true;
                     } else if (book.getShelf().toLowerCase().contains(lowerCaseFilter)) {
                         return true;
-                    } else if (book.getIsbn().toString().contains(lowerCaseFilter)) {
-                        return true;
-                    } else {
-                        return false;
-                    }
+                    } else return book.getIsbn().contains(lowerCaseFilter);
                 });
             });
 

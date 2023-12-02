@@ -2,9 +2,9 @@ package library.library.models;
 /** Represents the account information in the library system.
 */
 public class Account {
-    private String email;
+    private final String email;
     private String password;
-    private String accountType;
+    private final String accountType;
 
     /**
      * Constructs an Account object with the specified email, password, and account type.
