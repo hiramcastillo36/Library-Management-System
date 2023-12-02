@@ -88,7 +88,7 @@ public class LoginController {
             if(accountType.equals("Usuario"))
                 LibraryApplication.changeScene("Interface");
             else if(accountType.equals("Admin"))
-                LibraryApplication.changeScene("admin-dashboard");
+                LibraryApplication.changeScene("AdminMenu");
         }
     }
 

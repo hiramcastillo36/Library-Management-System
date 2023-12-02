@@ -4,16 +4,25 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import library.library.LibraryApplication;
 import library.library.controller.DatabaseController;
 import library.library.models.Booking;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class AdminDashboardController {
+    @FXML
+    private Text back;
 
     @FXML
     private Button searchBook;
@@ -62,12 +71,12 @@ public class AdminDashboardController {
 
             bookings.clear();
             if (rs.next()) {
-                booking = new Booking(  rs.getString("ISBN"),
-                                        rs.getInt("Clave_Usuario"),
-                                        rs.getString("NSS"),
-                                        rs.getInt("Dia_Prestamo"),
-                                        rs.getInt("Mes_Prestamo"),
-                                        rs.getInt("Ano_Prestamo")
+                booking = new Booking(rs.getString("ISBN"),
+                        rs.getInt("Clave_Usuario"),
+                        rs.getString("NSS"),
+                        rs.getInt("Dia_Prestamo"),
+                        rs.getInt("Mes_Prestamo"),
+                        rs.getInt("Ano_Prestamo")
                 );
                 confirm.setDisable(false);
                 bookings.add(booking);
@@ -85,10 +94,10 @@ public class AdminDashboardController {
     }
 
     private boolean validateInput() {
-        if(isbnBook.getText().isEmpty() || studentEmail.getText().isEmpty()){
-            if(isbnBook.getText().isEmpty())
+        if (isbnBook.getText().isEmpty() || studentEmail.getText().isEmpty()) {
+            if (isbnBook.getText().isEmpty())
                 isbnError.setText("Ingrese un ISBN");
-            if(studentEmail.getText().isEmpty())
+            if (studentEmail.getText().isEmpty())
                 studentEmailError.setText("Ingrese un correo");
             return true;
         }
@@ -98,19 +107,34 @@ public class AdminDashboardController {
     }
 
     public void confirmBooking(ActionEvent actionEvent) {
-            try {
-                String deleteBooking = "DELETE FROM PRESTAMO WHERE ISBN = ? AND Clave_Usuario = ?";
-                PreparedStatement statement = DatabaseController.getConnection().prepareStatement(deleteBooking);
-                Integer clave = booking.getClaveUsuario();
-                statement.setString(1, booking.getIsbn());
-                statement.setString(2, clave.toString());
-                DatabaseController.executeInsert(statement);
-                bookings.remove(booking);
-                isbnBook.setText("");
-                studentEmail.setText("");
-                confirm.setDisable(true);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        try {
+            String deleteBooking = "DELETE FROM PRESTAMO WHERE ISBN = ? AND Clave_Usuario = ?";
+            PreparedStatement statement = DatabaseController.getConnection().prepareStatement(deleteBooking);
+            Integer clave = booking.getClaveUsuario();
+            statement.setString(1, booking.getIsbn());
+            statement.setString(2, clave.toString());
+            DatabaseController.executeInsert(statement);
+            bookings.remove(booking);
+            isbnBook.setText("");
+            studentEmail.setText("");
+            confirm.setDisable(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void goBack(MouseEvent event) {
+        try {
+            // Cargar la nueva escena (en este caso, la escena anterior)
+            FXMLLoader loader = new FXMLLoader(LibraryApplication.class.getResource("view/AdminMenu.fxml"));
+            Scene previousScene = new Scene(loader.load());
+
+            // Obtener el Stage actual y cambiar su escena
+            Stage currentStage = (Stage) back.getScene().getWindow();
+            currentStage.setScene(previousScene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
