@@ -2,9 +2,15 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane fx:id="booking" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.library.booking.bookingController">
    <children>
+       <Text fx:id="back" layoutX="32.0" layoutY="46.0" onMouseClicked="#goBack" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;">
+       <font>
+           <Font size="30.0" />
+       </font>
+       </Text>
       <TableView fx:id="table" layoutX="69.0" layoutY="67.0" prefHeight="178.0" prefWidth="463.0">
         <columns>
           <TableColumn fx:id="isbnColumn" prefWidth="49.0" text="ISBN" />

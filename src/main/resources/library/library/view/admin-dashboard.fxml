@@ -6,6 +6,11 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.library.adminDashboard.AdminDashboardController">
    <children>
+       <Text fx:id="back" layoutX="32.0" layoutY="46.0" onMouseClicked="#goBack" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;">
+           <font>
+               <Font size="30.0" />
+           </font>
+       </Text>
       <TextField fx:id="isbnBook" layoutX="69.0" layoutY="119.0" />
       <TextField fx:id="studentEmail" layoutX="383.0" layoutY="119.0" />
        <TableView fx:id="tableBooking" layoutX="69.0" layoutY="166.0" prefHeight="108.0" prefWidth="463.0">
