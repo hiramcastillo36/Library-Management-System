@@ -18,34 +18,21 @@ public class AdminMenuController {
     private Button button1;
     @FXML
     private Button button2;
+    @FXML
+    private Button profileMenu;
 
     @FXML
     void handleButton1(ActionEvent event) {
-        try {
-            // Cargar la nueva escena (en este caso, la escena anterior)
-            FXMLLoader loader = new FXMLLoader(LibraryApplication.class.getResource("view/admin-dashboard.fxml"));
-            Scene previousScene = new Scene(loader.load());
-
-            // Obtener el Stage actual y cambiar su escena
-            Stage currentStage = (Stage) button1.getScene().getWindow();
-            currentStage.setScene(previousScene);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        LibraryApplication.changeScene("bookingDashboard");
     }
 
     @FXML
     void handleButton2(ActionEvent event) {
-        try {
-            // Cargar la nueva escena (en este caso, la escena anterior)
-            FXMLLoader loader = new FXMLLoader(LibraryApplication.class.getResource("view/booking.fxml"));
-            Scene previousScene = new Scene(loader.load());
+        LibraryApplication.changeScene("booksDashboard");
+    }
 
-            // Obtener el Stage actual y cambiar su escena
-            Stage currentStage = (Stage) button2.getScene().getWindow();
-            currentStage.setScene(previousScene);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    @FXML
+    void adminProfile(ActionEvent event) {
+        LibraryApplication.changeScene("adminProfile");
     }
 }

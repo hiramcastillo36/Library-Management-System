@@ -115,17 +115,7 @@ public class AdminInterfaceController implements Initializable {
 
     @FXML
     void goBack(MouseEvent event) {
-        try {
-            // Cargar la nueva escena (en este caso, la escena anterior)
-            FXMLLoader loader = new FXMLLoader(LibraryApplication.class.getResource("view/Interface.fxml"));
-            Scene previousScene = new Scene(loader.load());
-
-            // Obtener el Stage actual y cambiar su escena
-            Stage currentStage = (Stage) back.getScene().getWindow();
-            currentStage.setScene(previousScene);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        LibraryApplication.changeScene("adminMenu");
     }
 
     public void askBook(MouseEvent mouseEvent) {
