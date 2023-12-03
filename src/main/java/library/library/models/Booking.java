@@ -27,23 +27,4 @@ public class Booking {
         return claveUsuario;
     }
 
-    public void setClaveUsuario(int claveUsuario) {
-        this.claveUsuario = claveUsuario;
-    }
-
-    public String getNss() {
-        return nss;
-    }
-
-    public void setNss(String nss) {
-        this.nss = nss;
-    }
-
-    public Date getFechaPrestamo() {
-        return fechaPrestamo;
-    }
-
-    public void setFechaPrestamo(Date fechaPrestamo) {
-        this.fechaPrestamo = fechaPrestamo;
-    }
 }

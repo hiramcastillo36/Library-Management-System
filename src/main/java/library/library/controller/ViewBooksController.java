@@ -1,18 +1,10 @@
 package library.library.controller;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import library.library.models.Book;
-
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class ViewBooksController {
 
