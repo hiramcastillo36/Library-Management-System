@@ -121,4 +121,6 @@ public class AdminInterfaceController implements Initializable {
             e.printStackTrace(); // Manejo básico de excepciones, ajusta según sea necesario
         }
     }
+
+
 }

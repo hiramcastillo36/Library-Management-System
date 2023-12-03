@@ -49,6 +49,40 @@ public class DatabaseController {
         }
     }
 
+    public static boolean isISBNExists(String isbn) {
+        try {
+            String query = "SELECT COUNT(*) AS count FROM Libro WHERE ISBN = ?";
+            PreparedStatement statement = getConnection().prepareStatement(query);
+            statement.setString(1, isbn);
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                int count = rs.getInt("count");
+                return count > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();  // Manejo de excepciones, ajusta según sea necesario
+        }
+        return false;
+    }
+
+    public static boolean isTitleExists(String title) {
+        try {
+            String query = "SELECT COUNT(*) AS count FROM Libro WHERE Titulo = ?";
+            PreparedStatement statement = getConnection().prepareStatement(query);
+            statement.setString(1, title);
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                int count = rs.getInt("count");
+                return count > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();  // Manejo de excepciones, ajusta según sea necesario
+        }
+        return false;
+    }
+
     public static ResultSet executeQuery(String query) throws SQLException {
         PreparedStatement statement = getConnection().prepareStatement(query);
         return statement.executeQuery();
