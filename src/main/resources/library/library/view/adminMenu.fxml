@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.library.controller.AdminMenuController">
+   <children>
+      <Button fx:id="button1" layoutX="95.0" layoutY="265.0" mnemonicParsing="false" onAction="#handleButton1" prefHeight="42.0" prefWidth="170.0" text="Confirmar devoluciones" />
+      <Button fx:id="button2" layoutX="336.0" layoutY="265.0" mnemonicParsing="false" onAction="#handleButton2" prefHeight="42.0" prefWidth="170.0" text="Administrar libros" />
+      <Label layoutX="52.0" layoutY="31.0" prefHeight="52.0" prefWidth="497.0" text="¡Bienvenido al panel de administrador!" textFill="#bf2929">
+         <font>
+            <Font name="Calibri Bold Italic" size="30.0" />
+         </font>
+      </Label>
+      <Button fx:id="profileMenu" layoutX="215.0" layoutY="327.0" mnemonicParsing="false" onAction="#adminProfile" prefHeight="32.0" prefWidth="170.0" text="Mi perfil" />
+      <Label alignment="CENTER" layoutX="85.0" layoutY="136.0" prefHeight="32.0" prefWidth="170.0" text="Total de libros prestados">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="128.0" layoutY="168.0" prefHeight="32.0" prefWidth="84.0" text="Label" />
+      <Label alignment="CENTER" layoutX="335.0" layoutY="136.0" prefHeight="32.0" prefWidth="181.0" text="Total de usuario registrados">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="384.0" layoutY="168.0" prefHeight="32.0" prefWidth="84.0" text="Label" />
+   </children>
+</AnchorPane>

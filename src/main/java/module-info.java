@@ -18,6 +18,7 @@ module library.library {
     exports library.library.AdminInterface;
     exports library.library.adminDashboard;
     exports library.library.models;
+    exports library.library.adminProfile;
 
     opens library.library.controller to javafx.fxml;
     opens library.library.homePage;
@@ -26,4 +27,5 @@ module library.library {
     opens library.library.AdminInterface;
     opens library.library.adminDashboard;
     opens library.library.booking;
+    opens library.library.adminProfile;
 }

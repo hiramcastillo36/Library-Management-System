@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.library.adminProfile.AdminProfileController">
+    <children>
+        <BorderPane layoutX="209.0" layoutY="29.0" prefHeight="106.0" prefWidth="182.0">
+            <center>
+                <ImageView fitHeight="114.0" fitWidth="132.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                    <image>
+                        <Image url="@../assets/perfil.png" />
+                    </image>
+                </ImageView>
+            </center>
+        </BorderPane>
+        <Label layoutX="225.0" layoutY="169.0" text="Nombre" />
+        <TextField fx:id="name" editable="false" layoutX="225.0" layoutY="187.0" promptText="Usuario" />
+        <Label layoutX="225.0" layoutY="226.0" text="Correo" />
+        <TextField fx:id="email" editable="false" layoutX="225.0" layoutY="244.0" promptText="Correo" />
+        <Label layoutX="225.0" layoutY="282.0" text="Tipo de cuenta" />
+        <TextField fx:id="accountType" editable="false" layoutX="225.0" layoutY="300.0" promptText="Tipo de cuenta" />
+        <Text fx:id="back" layoutX="32.0" layoutY="46.0" onMouseClicked="#goBack" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;">
+            <font>
+                <Font size="30.0" />
+            </font>
+        </Text>
+    </children>
+</AnchorPane>
