@@ -56,7 +56,7 @@ public class LoginController {
             if(accountType.equals("Estudiante"))
                 LibraryApplication.changeScene("Interface");
             else if(accountType.equals("Admin"))
-                LibraryApplication.changeScene("admin-dashboard");
+                LibraryApplication.changeScene("adminMenu");
         }
     }
     private boolean validateInput() {
@@ -88,7 +88,7 @@ public class LoginController {
             if(accountType.equals("Usuario"))
                 LibraryApplication.changeScene("Interface");
             else if(accountType.equals("Admin"))
-                LibraryApplication.changeScene("AdminMenu");
+                LibraryApplication.changeScene("adminMenu");
         }
     }
 
