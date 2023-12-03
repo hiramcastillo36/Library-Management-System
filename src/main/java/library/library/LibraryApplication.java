@@ -17,7 +17,7 @@ public class LibraryApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         LibraryApplication.stage = stage;
-        Parent root = FXMLLoader.load(getClass().getResource("view/AdminInterface.fxml"));
+        Parent root = FXMLLoader.load(LibraryApplication.class.getResource("view/Interface.fxml"));
         stage.setTitle("Library");
         stage.setScene(new Scene(root, 600, 400));
         stage.show();
