@@ -83,6 +83,18 @@ public class InterfaceController
                         e.printStackTrace();
                     }
                     break;
+                case "Realizar prestamo":
+                    try {
+                        FXMLLoader loader = new FXMLLoader(LibraryApplication.class.getResource("view/UserLoan.fxml"));
+                        Scene newScene = new Scene(loader.load());
+
+                        Stage currentStage = (Stage) dropdown.getScene().getWindow();
+                        currentStage.setScene(newScene);
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    break;
 
                 case "Cerrar Sesión":
                     LibraryApplication.signOut();
@@ -101,7 +113,7 @@ public class InterfaceController
         } else {
             signin.setVisible(false);
             dropdown.setVisible(true);
-            list = FXCollections.observableArrayList("Perfil", "Mis Libros", "Cerrar Sesión");
+            list = FXCollections.observableArrayList("Perfil", "Mis Libros","Realizar prestamo", "Cerrar Sesión");
             dropdown.setItems(list);
         }
 
