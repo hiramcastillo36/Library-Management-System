@@ -6,12 +6,14 @@ import library.library.models.Account;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Session {
 
     private Account currentUser = null;
+    private SqlSentences sqlSentences = new SqlSentences();
 
     public int signIn(String email, String password) {
         // -1: Email doesn't exist
@@ -54,10 +56,12 @@ public class Session {
                 return 0;
             } else {
                 String hashPassword = PasswordHash.createHash(password);
-                String insert = "INSERT INTO Cuenta(correo_electronico, contraseña, tipo_usuario) VALUES('" +
-                                email + "', '" + hashPassword + "', 'Usuario')";
-                DatabaseController.executeInsert(insert);
-                System.out.println("Signed up");
+                String insert = sqlSentences.getSentence("sessions.insert.account");
+                PreparedStatement statement = DatabaseController.getConnection().prepareStatement(insert);
+                statement.setString(1, email);
+                statement.setString(2, hashPassword);
+                statement.setString(3, "Usuario");
+                DatabaseController.executeInsert(statement);
                 currentUser = new Account(email, "Usuario");
                 return 1;
             }
@@ -78,30 +82,6 @@ public class Session {
     public void signOut() {
         currentUser = null;
         LibraryApplication.changeScene("interface");
-    }
-
-    public static void main(String[] args) {
-        Session sessions = new Session();
-        sessions.signUp("hashpassword", "test");
-        sessions.signIn("hashpassword", "test");
-        ResultSet rs = null;
-
-        try {
-            rs = DatabaseController.executeQuery("SELECT * FROM Cuenta");
-            while (rs.next()) {
-                System.out.println(rs.getString("correo_electronico"));
-                System.out.println(rs.getString("contraseña"));
-                System.out.println(rs.getString("tipo_usuario"));
-            }
-        }catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                DatabaseController.closeConnection();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
     }
 
 }

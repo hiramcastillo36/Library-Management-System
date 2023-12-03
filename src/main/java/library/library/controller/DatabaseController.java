@@ -1,8 +1,6 @@
 package library.library.controller;
 
 import library.library.LibraryApplication;
-import library.library.models.Account;
-
 import java.sql.*;
 import java.util.logging.Logger;
 
@@ -93,13 +91,13 @@ public class DatabaseController {
         statement.executeUpdate();
     }
 
-    public static void executeInsert(String query) throws SQLException {
-        PreparedStatement statement = getConnection().prepareStatement(query);
-        statement.execute();
+    public static void executeInsert(PreparedStatement statement) throws SQLException {
+        statement.executeUpdate();
     }
 
     public static void closeConnection() throws SQLException {
         if (connection != null) {
+            LOGGER.info("Closing database connection...");
             connection.close();
         }
     }
