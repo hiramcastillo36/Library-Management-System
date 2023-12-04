@@ -64,7 +64,6 @@ public class AdminInterfaceController implements Initializable {
         }catch (Exception e) {
             e.printStackTrace();
         }
-        // Crear AnchorPane dinámicamente para cada libro y agregarlos al VBox
         for (Book libro : listaLibros) {
             AnchorPane anchorPane = createDataAnchorPane(libro, listaAutores.get(listaLibros.indexOf(libro)));
             container.getChildren().add(anchorPane);
@@ -151,11 +150,9 @@ public class AdminInterfaceController implements Initializable {
 
     public void deleteBook(Book libro){
         try {
-            String deleteBooking = "DELETE FROM PRESTAMO WHERE ISBN = '" + libro.getIsbn() + "'";
-            PreparedStatement statement = DatabaseController.getConnection().prepareStatement(deleteBooking);
-            DatabaseController.executeInsert(statement);
-
             String deleteBook = "DELETE FROM LIBRO WHERE ISBN = '" + libro.getIsbn() + "'";
+            DatabaseController.getConnection().prepareStatement(deleteBook);
+            PreparedStatement statement;
             statement = DatabaseController.getConnection().prepareStatement(deleteBook);
             DatabaseController.executeInsert(statement);
             container.getChildren().removeIf(node -> node.getUserData() == libro);
