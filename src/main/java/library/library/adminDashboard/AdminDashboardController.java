@@ -127,7 +127,7 @@ public class AdminDashboardController {
     void goBack(MouseEvent event) {
         try {
             // Cargar la nueva escena (en este caso, la escena anterior)
-            FXMLLoader loader = new FXMLLoader(LibraryApplication.class.getResource("view/AdminMenu.fxml"));
+            FXMLLoader loader = new FXMLLoader(LibraryApplication.class.getResource("view/adminMenu.fxml"));
             Scene previousScene = new Scene(loader.load());
 
             // Obtener el Stage actual y cambiar su escena

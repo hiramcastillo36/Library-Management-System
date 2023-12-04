@@ -183,7 +183,7 @@ public class addBookController {
         String isbn = ISBN.getText();
         Integer ISBN = Integer.valueOf(isbn);
         ResultSet rs = null;
-        String query = "INSERT INTO Autor (ISBN, Nombre, Apellido) VALUES (?, ?, ?)";
+        String query = "INSERT INTO Autores (ISBN, NombreAutor, ApellidoPaterno) VALUES (?, ?, ?)";
 
         try {
             Connection connection = DatabaseController.getConnection();  // Implementa tu lógica para obtener una conexión

@@ -13,7 +13,7 @@ import java.sql.SQLException;
 public class Session {
 
     private Account currentUser = null;
-    private final SqlSentences sqlSentences = new SqlSentences();
+
 
     public int signIn(String email, String password) {
         // -1: Email doesn't exist
@@ -51,7 +51,7 @@ public class Session {
                 return 0;
             } else {
                 String hashPassword = PasswordHash.createHash(password);
-                String insert = sqlSentences.getSentence("sessions.insert.account");
+                String insert = "INSERT INTO Cuenta(correo_electronico, contraseña, tipo_usuario) VALUES(?,?,?)";
                 PreparedStatement statement = DatabaseController.getConnection().prepareStatement(insert);
                 statement.setString(1, email);
                 statement.setString(2, hashPassword);

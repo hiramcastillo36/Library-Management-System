@@ -1,24 +1,17 @@
 package library.library.controller;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import library.library.LibraryApplication;
-import library.library.models.Book;
-import library.library.models.Student;
-
-import java.io.IOException;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.List;
+import java.time.LocalDate;
 
 public class UserLoanController {
     @FXML
@@ -33,14 +26,23 @@ public class UserLoanController {
     private void initialize() {
         ResultSet rs = null;
         try {
-            rs = DatabaseController.executeQuery("SELECT * FROM Autores\n" +
-                    "INNER JOIN main.LIBRO L on L.ISBN = Autores.ISBN");
+            String query = LibraryApplication.getSession().getEmail();
+            ResultSet st;
+            PreparedStatement userStatent = DatabaseController.getConnection().prepareStatement("SELECT * FROM Estudiantes WHERE correo_electronico = ?");
+            userStatent.setString(1, query);
+            st = userStatent.executeQuery();
+            if(st.next()){
+                String unborrowedBooks = "SELECT * FROM ( SELECT L2.* FROM main.LIBRO L2 LEFT JOIN main.PRESTAMO P ON L2.ISBN = P.ISBN AND P.Clave_Usuario = ? WHERE P.ISBN IS NULL ) as L INNER JOIN main.AUTORES A on A.ISBN = L.ISBN";
+                PreparedStatement statement = DatabaseController.getConnection().prepareStatement(unborrowedBooks);
+                statement.setString(1, st.getString("Clave_Usuario"));
+                rs = statement.executeQuery();
 
-            while (rs.next()) {
-                AnchorPane anchorPane = createDataAnchorPane(rs.getString("Titulo"),
-                        rs.getString("NombreAutor"), rs.getString("ISBN"));
-                container.getChildren().add(anchorPane);
-
+                while (rs.next()) {
+                    AnchorPane anchorPane = createDataAnchorPane(   rs.getString("Titulo"),
+                                                                    rs.getString("NombreAutor"),
+                                                                    rs.getString("ISBN"));
+                    container.getChildren().add(anchorPane);
+                }
             }
 
         }catch (Exception e) {
@@ -49,17 +51,7 @@ public class UserLoanController {
     }
 
     public void goBack(MouseEvent mouseEvent) {
-        try {
-            // Cargar la nueva escena (en este caso, la escena anterior)
-            FXMLLoader loader = new FXMLLoader(LibraryApplication.class.getResource("view/Interface.fxml"));
-            Scene previousScene = new Scene(loader.load());
-
-            // Obtener el Stage actual y cambiar su escena
-            Stage currentStage = (Stage) back.getScene().getWindow();
-            currentStage.setScene(previousScene);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        LibraryApplication.changeScene("Interface");
     }
 
     private AnchorPane createDataAnchorPane(String title, String author, String isbn) {
@@ -68,6 +60,11 @@ public class UserLoanController {
         anchorPane.setPrefWidth(446.0);
         anchorPane.setStyle("-fx-background-color: lightgray; -fx-border-color: darkgray;");
 
+        Button borrowedBook = new Button("Pedir Libro");
+        borrowedBook.setOnAction(event -> handleborrowedBook(isbn));
+        borrowedBook.setLayoutX(414.0);
+        borrowedBook.setLayoutY(6.0);
+        
         Label labelLibro = new Label(title);
         labelLibro.setLayoutX(14.0);
         labelLibro.setLayoutY(10.0);
@@ -80,8 +77,42 @@ public class UserLoanController {
         labelISBN.setLayoutX(300.0);
         labelISBN.setLayoutY(10.0);
 
-        anchorPane.getChildren().addAll(labelLibro, labelAutor, labelISBN);
+        anchorPane.getChildren().addAll(labelLibro, labelAutor, labelISBN, borrowedBook);
+        anchorPane.setUserData(isbn);
 
         return anchorPane;
+    }
+
+    private void handleborrowedBook(String isbn) {
+        LocalDate localDate = LocalDate.now();
+        LocalDate currentDate
+                = LocalDate.parse(localDate.toString());
+
+        Integer day = currentDate.getDayOfMonth();
+        Integer month = currentDate.getMonthValue();
+        Integer year = currentDate.getYear();
+
+        ResultSet rs = null;
+        try {
+            String query = LibraryApplication.getSession().getEmail();
+            ResultSet st;
+            PreparedStatement userStatent = DatabaseController.getConnection().prepareStatement("SELECT * FROM Estudiantes WHERE correo_electronico = ?");
+            userStatent.setString(1, query);
+            st = userStatent.executeQuery();
+            if(st.next()){
+                    String addBorrowedBook = "INSERT INTO Prestamo(ISBN, Clave_Usuario, NSS, Dia_Prestamo, Mes_Prestamo, Ano_Prestamo) VALUES(?,?,?,?,?,?);";
+                    PreparedStatement statementBorrowed = DatabaseController.getConnection().prepareStatement(addBorrowedBook);
+                    statementBorrowed.setString(1, isbn);
+                    statementBorrowed.setString(2, st.getString("Clave_Usuario"));
+                    statementBorrowed.setString(3, "531-679-567");
+                    statementBorrowed.setString(4, day.toString());
+                    statementBorrowed.setString(5, month.toString());
+                    statementBorrowed.setString(6, year.toString());
+                    DatabaseController.executeInsert(statementBorrowed);
+                    container.getChildren().removeIf(node -> node.getUserData().equals(isbn));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

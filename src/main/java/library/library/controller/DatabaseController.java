@@ -9,7 +9,7 @@ public class DatabaseController {
 
     private static Connection connection = null;
     private static final String driver = "org.sqlite.JDBC";
-    private static final String URL = "jdbc:sqlite:" +
+    private static final String URL = "jdbc:sqlite::resource:" +
             LibraryApplication.class.getResource("database/Biblioteca_12.db");
 
     public static Connection getConnection() throws SQLException {
