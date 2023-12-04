@@ -52,11 +52,9 @@ public class addBookController {
     @FXML
     void goBack(MouseEvent event) {
         try {
-            // Cargar la nueva escena (en este caso, la escena anterior)
             FXMLLoader loader = new FXMLLoader(LibraryApplication.class.getResource("view/booksDashboard.fxml"));
             Scene previousScene = new Scene(loader.load());
 
-            // Obtener el Stage actual y cambiar su escena
             Stage currentStage = (Stage) back.getScene().getWindow();
             currentStage.setScene(previousScene);
         } catch (IOException e) {
@@ -74,15 +72,13 @@ public class addBookController {
         String name = Name.getText();
         String lastname = Lastname.getText();
 
-        //valida que el isbn no este vacio
         if (isbn.isEmpty()) {
             showErrorAlert("Error de ISBN", "El ISBN no puede estar vacío.");
             return;
         }
 
-        // Validar que el ISBN tenga exactamente 6 dígitos
-        if (isbn.length() != 3) {
-            showErrorAlert("Error de ISBN", "El ISBN debe tener exactamente 3 dígitos.");
+        if (isbn.length() != 6) {
+            showErrorAlert("Error de ISBN", "El ISBN debe tener exactamente 6 dígitos.");
             return;
         }
 
@@ -91,66 +87,55 @@ public class addBookController {
             return;
         }
 
-        // Validar que el ISBN no exista previamente en la base de datos
         if (DatabaseController.isISBNExists(isbn)) {
             showErrorAlert("Error de ISBN", "El ISBN ya existe en la base de datos.");
             return;
         }
 
-        // Validar que el título no exista previamente en la base de datos
         if (DatabaseController.isTitleExists(title)) {
             showErrorAlert("Error de Título", "El título ya existe en la base de datos.");
             return;
         }
 
-        // Validar que el título no esté vacío
         if (title.isEmpty()) {
             showErrorAlert("Error de Título", "El título no puede estar vacío.");
             return;
         }
 
-        // Validar que el año no esté vacío y contenga solo números
         if (year.isEmpty() || !year.matches("\\d+")) {
             showErrorAlert("Error de Año", "El año no puede estar vacío y debe contener solo números.");
             return;
         }
 
-        /// Validar que el nombre no esté vacío y contenga solo letras
         if (name.isEmpty() || !name.matches("[a-zA-Z]+")) {
             showErrorAlert("Error de Nombre", "El nombre no puede estar vacío y debe contener solo letras.");
             return;
         }
 
-        // Validar que el apellido no esté vacío y contenga solo letras
         if (lastname.isEmpty() || !lastname.matches("[a-zA-Z]+")) {
             showErrorAlert("Error de Apellido", "El apellido no puede estar vacío y debe contener solo letras.");
             return;
         }
 
-        // Validar que el piso no esté vacío y contenga solo números
         if (floor.isEmpty() || !floor.matches("\\d+")) {
             showErrorAlert("Error de Piso", "El piso no puede estar vacío y debe contener solo números.");
             return;
         }
 
-        // Validar que el estante no esté vacío y contenga solo números
         if (shelf.isEmpty() || !shelf.matches("\\d+")) {
             showErrorAlert("Error de Estante", "El estante no puede estar vacío y debe contener solo números.");
             return;
         }
 
         Integer ISBN = Integer.valueOf(isbn);
-        // Si todas las validaciones pasan, puedes crear un nuevo libro y agregarlo a la base de datos
-        Book nuevoLibro = new Book(ISBN, title, year, floor, shelf);
+        Book nuevoLibro = new Book(isbn, title, year, floor, shelf);
         Author author = new Author(ISBN, name, lastname);
 
         insertBook(nuevoLibro);
         try {
-            // Cargar la nueva escena (en este caso, la escena anterior)
             FXMLLoader loader = new FXMLLoader(LibraryApplication.class.getResource("view/booksDashboard.fxml"));
             Scene previousScene = new Scene(loader.load());
 
-            // Obtener el Stage actual y cambiar su escena
             Stage currentStage = (Stage) back.getScene().getWindow();
             currentStage.setScene(previousScene);
         } catch (IOException e) {
@@ -173,12 +158,10 @@ public class addBookController {
                 "VALUES (?, ?, ?, ?, ?, ?)";
 
         try {
-            // Crea la conexión y prepara la declaración
             Connection connection = DatabaseController.getConnection();  // Implementa tu lógica para obtener una conexión
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
-            // Establece los parámetros de la declaración con los valores del libro
-            preparedStatement.setInt(1, book.getISBN());
+            preparedStatement.setString(1, book.getISBN());
             preparedStatement.setString(2, book.getTitle());
             preparedStatement.setString(3, book.getYear());
             preparedStatement.setInt(4, 123456);
@@ -186,10 +169,8 @@ public class addBookController {
             preparedStatement.setString(6, book.getShelf());
 
 
-            // Ejecuta la actualización
             preparedStatement.executeUpdate();
 
-            // Cierra la conexión y la declaración
             preparedStatement.close();
 
         } catch (SQLException e) {
@@ -204,19 +185,15 @@ public class addBookController {
         String query = "INSERT INTO Autor (ISBN, Nombre, Apellido) VALUES (?, ?, ?)";
 
         try {
-            // Crea la conexión y prepara la declaración
             Connection connection = DatabaseController.getConnection();  // Implementa tu lógica para obtener una conexión
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
-            // Establece los parámetros de la declaración con los valores del libro
             preparedStatement.setInt(1, ISBN);
             preparedStatement.setString(2, author.getName());
             preparedStatement.setString(3, author.getLastName());
 
-            // Ejecuta la actualización
             preparedStatement.executeUpdate();
 
-            // Cierra la conexión y la declaración
             preparedStatement.close();
 
         } catch (SQLException e) {
