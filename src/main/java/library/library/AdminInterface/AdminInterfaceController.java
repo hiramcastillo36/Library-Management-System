@@ -38,22 +38,26 @@ public class AdminInterfaceController implements Initializable {
     @FXML
     private VBox container;
 
-    // Supongamos que tienes una lista de libros en tu controlador
     private final List<Book> listaLibros = new ArrayList<>();
+    private final List<String> listaAutores = new ArrayList<>();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ResultSet rs = null;
        try {
-            rs = DatabaseController.executeQuery("SELECT * FROM Libro");
+            rs = DatabaseController.executeQuery("SELECT * FROM Autores\n" +
+                    "INNER JOIN main.LIBRO L on L.ISBN = Autores.ISBN;");
+
             while (rs.next()) {
                 String isbn = rs.getString("ISBN");
                 String title = rs.getString("Titulo");
                 String year = rs.getString("A_publicacion");
                 String floor = rs.getString("Piso");
                 String shelf = rs.getString("Estante");
+                String author = rs.getString("NombreAutor");
 
                 listaLibros.add(new Book(isbn, title, year, floor, shelf));
+                listaAutores.add(author);
             }
 
         }catch (Exception e) {
@@ -61,12 +65,12 @@ public class AdminInterfaceController implements Initializable {
         }
         // Crear AnchorPane dinámicamente para cada libro y agregarlos al VBox
         for (Book libro : listaLibros) {
-            AnchorPane anchorPane = createDataAnchorPane(libro);
+            AnchorPane anchorPane = createDataAnchorPane(libro, listaAutores.get(listaLibros.indexOf(libro)));
             container.getChildren().add(anchorPane);
         }
     }
 
-    private AnchorPane createDataAnchorPane(Book libro) {
+    private AnchorPane createDataAnchorPane(Book libro, String author) {
         AnchorPane anchorPane = new AnchorPane();
         anchorPane.setPrefHeight(38.0);
         anchorPane.setPrefWidth(446.0);
@@ -82,7 +86,7 @@ public class AdminInterfaceController implements Initializable {
         labelLibro.setLayoutX(14.0);
         labelLibro.setLayoutY(10.0);
 
-        Label labelAutor = new Label("Autor");
+        Label labelAutor = new Label(author);
         labelAutor.setLayoutX(200.0);
         labelAutor.setLayoutY(10.0);
 
