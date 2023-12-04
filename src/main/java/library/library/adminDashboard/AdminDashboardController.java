@@ -85,7 +85,7 @@ public class AdminDashboardController {
                 confirm.setDisable(false);
                 bookings.add(booking);
             } else {
-                confirm.setDisable(false);
+                confirm.setDisable(true);
                 booking = null;
             }
             isbnColumn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
@@ -104,7 +104,7 @@ public class AdminDashboardController {
             if (isbnBook.getText().isEmpty())
                 isbnError.setText("Ingrese un ISBN");
             if (studentEmail.getText().isEmpty())
-                studentEmailError.setText("Ingrese una clave de usuario");
+                studentEmailError.setText("Ingrese una clave");
             return true;
         }
         isbnError.setText("");

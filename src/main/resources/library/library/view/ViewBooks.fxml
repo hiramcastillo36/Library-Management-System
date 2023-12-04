@@ -20,7 +20,7 @@
                 <Font size="30.0" />
             </font>
         </Text>
-        <Label layoutX="70.0" layoutY="20.0" prefHeight="39.0" prefWidth="204.0" text="Libros Prestados" textFill="#bf2d2d">
+        <Label layoutX="70.0" layoutY="20.0" prefHeight="39.0" prefWidth="254.0" text="Libros Prestados" textFill="#bf2d2d">
             <font>
                 <Font name="Calibri Bold Italic" size="30.0" />
             </font>

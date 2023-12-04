@@ -62,9 +62,9 @@ public class LoginController {
     private boolean validateInput() {
         if (email.getText().isEmpty() || password.getText().isEmpty()) {
             if(email.getText().isEmpty())
-                errorEmail.setText("No puede estar vacío");
+                errorEmail.setText("Campo requerido");
             if (password.getText().isEmpty()) {
-                errorPassword.setText("No puede estar vacío");
+                errorPassword.setText("Campo requerido");
             }
             return true;
         }

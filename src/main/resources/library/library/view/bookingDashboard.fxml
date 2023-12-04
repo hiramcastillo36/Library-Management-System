@@ -31,7 +31,7 @@
          </font>
       </Label>
       <Button fx:id="searchBook" layoutX="117.0" layoutY="317.0" mnemonicParsing="false" onAction="#searchBook" text="Buscar libro" />
-      <Label fx:id="studentEmailError" layoutX="396.0" layoutY="144.0" prefHeight="17.0" prefWidth="123.0" textFill="RED" />
+      <Label fx:id="studentEmailError" layoutX="386.0" layoutY="144.0" prefHeight="17.0" prefWidth="150.0" textFill="RED" />
       <Label fx:id="isbnError" layoutX="82.0" layoutY="144.0" prefHeight="17.0" prefWidth="123.0" textFill="RED" />
    </children>
 </AnchorPane>
