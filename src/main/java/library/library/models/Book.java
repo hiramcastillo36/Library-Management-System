@@ -15,6 +15,7 @@ public class Book {
 
      String shelf;
 
+     String editorial;
 
 
     /**
@@ -88,4 +89,5 @@ public class Book {
     public void setShelf(String shelf) {
         this.shelf = shelf;
     }
+
 }

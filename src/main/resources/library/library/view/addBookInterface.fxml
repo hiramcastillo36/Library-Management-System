@@ -27,8 +27,8 @@
    <TextField fx:id="Year" layoutX="118.0" layoutY="197.0" />
    <Label layoutX="331.0" layoutY="181.0" text="Piso" />
    <TextField fx:id="Floor" layoutX="329.0" layoutY="195.0" />
-   <Label layoutX="236.0" layoutY="231.0" text="Estante" />
-   <TextField fx:id="Shelf" layoutX="234.0" layoutY="245.0" />
+   <Label layoutX="236.0" layoutY="241.0" text="Estante" />
+   <TextField fx:id="Shelf" layoutX="234.0" layoutY="255.0" />
    <Label layoutX="120.0" layoutY="126.0" text="Nombre del Autor" />
    <TextField fx:id="Name" layoutX="118.0" layoutY="140.0" />
    <Label layoutX="333.0" layoutY="128.0" text="Apellido del Autor" />
