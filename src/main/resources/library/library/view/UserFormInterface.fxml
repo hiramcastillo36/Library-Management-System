@@ -6,6 +6,11 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.library.login.SignUp">
    <children>
+      <Text fx:id="back" layoutX="16.0" layoutY="32.0" onMouseClicked="#goBack" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Text>
       <Label layoutX="126.0" layoutY="103.0" text="Clave" />
       <TextField fx:id="claveUnica" layoutX="126.0" layoutY="121.0" />
       <Label layoutX="212.0" layoutY="48.0" text="Ingresa tus datos">
