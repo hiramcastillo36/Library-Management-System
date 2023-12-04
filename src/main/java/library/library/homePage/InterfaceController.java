@@ -7,6 +7,7 @@ import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -17,9 +18,11 @@ import library.library.controller.DatabaseController;
 import library.library.models.Book;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.ResultSet;
+import java.util.ResourceBundle;
 
-public class InterfaceController
+public class InterfaceController implements Initializable
 {
     @FXML
     private ComboBox<String> dropdown;
@@ -104,8 +107,13 @@ public class InterfaceController
             }
         }
     }
-    @javafx.fxml.FXML
-    public void initialize() {
+
+    public void signin(MouseEvent mouseEvent) {
+        LibraryApplication.changeScene("Login");
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         ObservableList<String> list;
         if(LibraryApplication.getSession() == null) {
             signin.setVisible(true);
@@ -167,10 +175,6 @@ public class InterfaceController
         }catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public void signin(MouseEvent mouseEvent) {
-        LibraryApplication.changeScene("Login");
     }
 }
 

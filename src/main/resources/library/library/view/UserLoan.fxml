@@ -25,7 +25,5 @@
                <Font size="30.0" />
            </font>
        </Text>
-       <TextField fx:id="searchField" layoutX="42.0" layoutY="46.0" prefHeight="25.0" prefWidth="408.0" promptText="Busca por Título" />
-      <Button layoutX="439.0" layoutY="365.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="132.0" text="Realizar prestamo" />
    </children>
 </AnchorPane>
