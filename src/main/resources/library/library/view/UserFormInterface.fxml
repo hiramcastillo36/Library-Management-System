@@ -1,32 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.library.login.SignUp">
    <children>
+      <Text fx:id="back" layoutX="16.0" layoutY="32.0" onMouseClicked="#goBack" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Text>
       <Label layoutX="126.0" layoutY="103.0" text="Clave" />
-      <TextField fx:id="clave" layoutX="126.0" layoutY="121.0" />
-      <Label layoutX="191.0" layoutY="47.0" text="Ingresa tus datos">
+      <TextField fx:id="claveUnica" layoutX="126.0" layoutY="121.0" />
+      <Label layoutX="212.0" layoutY="48.0" text="Ingresa tus datos">
          <font>
             <Font name="System Bold" size="27.0" />
          </font>
       </Label>
       <Label layoutX="353.0" layoutY="103.0" text="Nombre" />
       <TextField fx:id="nombre" layoutX="353.0" layoutY="121.0" />
-      <Label layoutX="126.0" layoutY="164.0" text="Apellido Paterno" />
-      <TextField fx:id="paterno" layoutX="126.0" layoutY="182.0" />
-      <Label layoutX="353.0" layoutY="164.0" text="Apellido Materno" />
-      <TextField fx:id="materno" layoutX="353.0" layoutY="182.0" />
-      <Label fx:id="paternoError" layoutX="177.0" layoutY="208.0" text="Label" />
-      <Label fx:id="claveError" layoutX="187.0" layoutY="147.0" text="Label" />
-      <Label fx:id="nombreError" layoutX="414.0" layoutY="147.0" text="Label" />
-      <Label fx:id="maternoError" layoutX="414.0" layoutY="208.0" text="Label" />
-      <Label layoutX="242.0" layoutY="226.0" text="Contraseña" />
-      <TextField fx:id="contraseña" layoutX="242.0" layoutY="244.0" />
-      <Label fx:id="contraseñaError" layoutX="293.0" layoutY="270.0" text="Label" />
+      <Label layoutX="124.0" layoutY="187.0" text="Apellido Paterno" />
+      <TextField fx:id="apellidoPaterno" layoutX="126.0" layoutY="204.0" />
+      <Label layoutX="353.0" layoutY="178.0" text="Apellido Materno" />
+      <TextField fx:id="apellidoMaterno" layoutX="353.0" layoutY="204.0" />
+      <Label fx:id="errorApellidoPaterno" layoutX="166.0" layoutY="227.0" prefHeight="17.0" prefWidth="79.0" textFill="RED" />
+      <Label fx:id="claveError" layoutX="169.0" layoutY="147.0" textFill="RED" />
+      <Label fx:id="errorNombre" layoutX="393.0" layoutY="147.0" prefHeight="17.0" prefWidth="79.0" textFill="RED" />
+      <Label fx:id="errorApellidoMaterno" layoutX="393.0" layoutY="227.0" prefHeight="17.0" prefWidth="79.0" textFill="RED" />
+      <Label layoutX="228.0" layoutY="266.0" text="Contraseña" />
+      <PasswordField fx:id="password" layoutX="228.0" layoutY="284.0" />
+      <Label fx:id="errorPassword" layoutX="271.0" layoutY="310.0" prefHeight="17.0" prefWidth="74.0" textFill="RED" />
+      <Button fx:id="buttonSignUp" layoutX="269.0" layoutY="345.0" mnemonicParsing="false" onAction="#signUp" text="Registrarse" />
    </children>
 </AnchorPane>

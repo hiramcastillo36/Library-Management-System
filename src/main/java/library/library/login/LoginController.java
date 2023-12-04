@@ -76,20 +76,7 @@ public class LoginController {
 
     @FXML
     protected void signUp() {
-
-        if(validateInput())
-            return;
-
-        int result = LibraryApplication.signUp(email.getText(), password.getText());
-        if(result == 0)
-            errorEmail.setText("Email ya existe");
-        else if(result == 1){
-            String accountType = LibraryApplication.getSession().getAccountType();
-            if(accountType.equals("Usuario"))
-                LibraryApplication.changeScene("Interface");
-            else if(accountType.equals("Admin"))
-                LibraryApplication.changeScene("adminMenu");
-        }
+        LibraryApplication.changeScene("UserFormInterface");
     }
 
     @FXML

@@ -45,6 +45,10 @@ public class ViewBooksController {
         anchorPane.setPrefWidth(446.0);
         anchorPane.setStyle("-fx-background-color: lightgray; -fx-border-color: darkgray;");
 
+        Label claveUsuario = new Label(clave_usuario);
+        claveUsuario.setLayoutX(414.0);
+        claveUsuario.setLayoutY(6.0);
+
         Label labelLibro = new Label(title);
         labelLibro.setLayoutX(14.0);
         labelLibro.setLayoutY(10.0);
@@ -57,7 +61,8 @@ public class ViewBooksController {
         labelISBN.setLayoutX(300.0);
         labelISBN.setLayoutY(10.0);
 
-        anchorPane.getChildren().addAll(labelLibro, labelAutor, labelISBN);
+
+        anchorPane.getChildren().addAll(labelLibro, labelAutor, labelISBN, claveUsuario);
 
         return anchorPane;
     }
