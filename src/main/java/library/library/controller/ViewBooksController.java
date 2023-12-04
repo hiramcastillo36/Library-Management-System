@@ -2,8 +2,11 @@ package library.library.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import library.library.LibraryApplication;
+
 import java.sql.ResultSet;
 
 public class ViewBooksController {
@@ -59,4 +62,8 @@ public class ViewBooksController {
         return anchorPane;
     }
 
+    @FXML
+    void goBack(MouseEvent event) {
+        LibraryApplication.changeScene("adminMenu");
+    }
 }

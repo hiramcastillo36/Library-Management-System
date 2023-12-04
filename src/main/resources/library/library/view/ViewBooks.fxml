@@ -15,8 +15,12 @@
                 </VBox>
             </content>
         </ScrollPane>
-        <TextField fx:id="searchField" layoutX="42.0" layoutY="43.0" prefHeight="28.0" prefWidth="408.0" promptText="Busca por Título" />
-        <Label layoutX="42.0" layoutY="7.0" prefHeight="39.0" prefWidth="204.0" text="Libros Prestados" textFill="#bf2d2d">
+        <Text fx:id="back" layoutX="32.0" layoutY="46.0" onMouseClicked="#goBack" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;">
+            <font>
+                <Font size="30.0" />
+            </font>
+        </Text>
+        <Label layoutX="70.0" layoutY="20.0" prefHeight="39.0" prefWidth="204.0" text="Libros Prestados" textFill="#bf2d2d">
             <font>
                 <Font name="Calibri Bold Italic" size="30.0" />
             </font>
