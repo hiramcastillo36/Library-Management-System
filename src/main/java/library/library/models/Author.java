@@ -35,4 +35,11 @@ public class Author {
         return name;
     }
 
+    /**
+     * Gets the last name of the author.
+     *
+     * @return The last name of the author.
+     */
+    public String getLastName() { return lastName; }
+
 }
