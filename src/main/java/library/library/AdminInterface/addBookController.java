@@ -132,6 +132,7 @@ public class addBookController {
         Author author = new Author(ISBN, name, lastname);
 
         insertBook(nuevoLibro);
+        insertAuthor(author);
         try {
             FXMLLoader loader = new FXMLLoader(LibraryApplication.class.getResource("view/booksDashboard.fxml"));
             Scene previousScene = new Scene(loader.load());
@@ -178,7 +179,7 @@ public class addBookController {
         }
     }
 
-    public void insertAutohr(Author author) {
+    public void insertAuthor(Author author) {
         String isbn = ISBN.getText();
         Integer ISBN = Integer.valueOf(isbn);
         ResultSet rs = null;
