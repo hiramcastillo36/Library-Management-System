@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="126.0" layoutY="103.0" text="Clave" />
+      <TextField fx:id="clave" layoutX="126.0" layoutY="121.0" />
+      <Label layoutX="191.0" layoutY="47.0" text="Ingresa tus datos">
+         <font>
+            <Font name="System Bold" size="27.0" />
+         </font>
+      </Label>
+      <Label layoutX="353.0" layoutY="103.0" text="Nombre" />
+      <TextField fx:id="nombre" layoutX="353.0" layoutY="121.0" />
+      <Label layoutX="126.0" layoutY="164.0" text="Apellido Paterno" />
+      <TextField fx:id="paterno" layoutX="126.0" layoutY="182.0" />
+      <Label layoutX="353.0" layoutY="164.0" text="Apellido Materno" />
+      <TextField fx:id="materno" layoutX="353.0" layoutY="182.0" />
+      <Label fx:id="paternoError" layoutX="177.0" layoutY="208.0" text="Label" />
+      <Label fx:id="claveError" layoutX="187.0" layoutY="147.0" text="Label" />
+      <Label fx:id="nombreError" layoutX="414.0" layoutY="147.0" text="Label" />
+      <Label fx:id="maternoError" layoutX="414.0" layoutY="208.0" text="Label" />
+      <Label layoutX="242.0" layoutY="226.0" text="Contraseña" />
+      <TextField fx:id="contraseña" layoutX="242.0" layoutY="244.0" />
+      <Label fx:id="contraseñaError" layoutX="293.0" layoutY="270.0" text="Label" />
+   </children>
+</AnchorPane>
