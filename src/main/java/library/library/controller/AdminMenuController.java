@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import library.library.LibraryApplication;
 
@@ -88,4 +89,8 @@ public class AdminMenuController {
         LibraryApplication.changeScene("ViewBooks");
     }
 
+    @FXML
+    public void signout(MouseEvent mouseEvent) {
+        LibraryApplication.signOut();
+    }
 }
