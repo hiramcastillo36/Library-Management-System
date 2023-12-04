@@ -43,8 +43,12 @@ public class Session {
         return -2;
     }
 
-    public int signUp(String email, String password) {
+    public int signUp(String clave, String password,
+                      String nombre, String apellidoPaterno,
+                      String apellidoMaterno
+                      ) {
         ResultSet rs = null;
+        String email = clave + "@alumnos.uaslp.mx";
         try {
             rs = DatabaseController.executeQuery("SELECT * FROM Cuenta WHERE correo_electronico = '" + email + "'");
             if (rs.next()) {
@@ -52,12 +56,20 @@ public class Session {
             } else {
                 String hashPassword = PasswordHash.createHash(password);
                 String insert = "INSERT INTO Cuenta(correo_electronico, contraseña, tipo_usuario) VALUES(?,?,?)";
+                String insertStudent = "INSERT INTO Estudiantes(Clave_Usuario, Nombre_Usuario, Apellido_Paterno, Apellido_Materno, correo_electronico) VALUES(?,?,?,?,?)";
+                PreparedStatement statementStudent = DatabaseController.getConnection().prepareStatement(insertStudent);
                 PreparedStatement statement = DatabaseController.getConnection().prepareStatement(insert);
                 statement.setString(1, email);
                 statement.setString(2, hashPassword);
-                statement.setString(3, "Usuario");
+                statement.setString(3, "Estudiante");
+                statementStudent.setString(1, clave);
+                statementStudent.setString(2, nombre);
+                statementStudent.setString(3, apellidoPaterno);
+                statementStudent.setString(4, apellidoMaterno);
+                statementStudent.setString(5, email);
+                DatabaseController.executeInsert(statementStudent);
                 DatabaseController.executeInsert(statement);
-                currentUser = new Account(email, "Usuario");
+                currentUser = new Account(email, "Estudiante");
                 return 1;
             }
         }catch (SQLException e) {

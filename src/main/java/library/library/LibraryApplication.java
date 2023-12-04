@@ -38,8 +38,14 @@ public class LibraryApplication extends Application {
         return session.signIn(email, password);
     }
 
-    public static int signUp(String email, String password) {
-        return session.signUp(email, password);
+    public static int signUp(   String clave,
+                                String password,
+                                String nombre,
+                                String apellidoPaterno,
+                                String apellidoMaterno
+
+    ) {
+        return session.signUp(clave, password, nombre, apellidoPaterno, apellidoMaterno);
     }
 
     public static void signOut() {
