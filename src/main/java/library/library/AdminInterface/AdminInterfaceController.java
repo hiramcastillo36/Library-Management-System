@@ -3,6 +3,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -100,21 +101,12 @@ public class AdminInterfaceController implements Initializable {
     }
 
     private void handleDeleteBook(Book libro) {
-        try {
-            String deleteBooking = "DELETE FROM PRESTAMO WHERE ISBN = '" + libro.getIsbn() + "'";
-            PreparedStatement statement = DatabaseController.getConnection().prepareStatement(deleteBooking);
-            DatabaseController.executeInsert(statement);
-
-            String deleteBook = "DELETE FROM LIBRO WHERE ISBN = '" + libro.getIsbn() + "'";
-            statement = DatabaseController.getConnection().prepareStatement(deleteBook);
-            DatabaseController.executeInsert(statement);
-            container.getChildren().removeIf(node -> node.getUserData() == libro);
-        } catch (SQLException e){
-            e.printStackTrace();
-        }catch (Exception e) {
-            e.printStackTrace();
+        if(isBookBorrowed(libro)){
+            showErrorAlert("Error", "El libro no se puede eliminar porque está prestado");
+            return;
+        } else {
+            deleteBook(libro);
         }
-
     }
 
     @FXML
@@ -136,5 +128,41 @@ public class AdminInterfaceController implements Initializable {
         }
     }
 
+    private void showErrorAlert(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
 
+    private boolean isBookBorrowed(Book libro){
+        ResultSet rs = null;
+        try {
+            rs = DatabaseController.executeQuery("SELECT * FROM PRESTAMO WHERE ISBN = '" + libro.getIsbn() + "'");
+            if(rs.next()){
+                return true;
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public void deleteBook(Book libro){
+        try {
+            String deleteBooking = "DELETE FROM PRESTAMO WHERE ISBN = '" + libro.getIsbn() + "'";
+            PreparedStatement statement = DatabaseController.getConnection().prepareStatement(deleteBooking);
+            DatabaseController.executeInsert(statement);
+
+            String deleteBook = "DELETE FROM LIBRO WHERE ISBN = '" + libro.getIsbn() + "'";
+            statement = DatabaseController.getConnection().prepareStatement(deleteBook);
+            DatabaseController.executeInsert(statement);
+            container.getChildren().removeIf(node -> node.getUserData() == libro);
+        } catch (SQLException e){
+            e.printStackTrace();
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
