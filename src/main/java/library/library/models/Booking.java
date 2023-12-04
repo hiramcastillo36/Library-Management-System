@@ -7,12 +7,20 @@ public class Booking {
     private int claveUsuario;
     private String nss;
     // date
-    private Date fechaPrestamo;
-    public Booking(String isbn, int clave_usuario, String NSS, int dias_prestamo, int mes_prestamo, int año_prestamo) {
+    private Integer diaPrestamo;
+
+    private Integer mesPrestamo;
+
+    private Integer añoPrestamo;
+
+
+    public Booking(String isbn, int clave_usuario, String NSS, int dia_prestamo, int mes_prestamo, int año_prestamo) {
         this.isbn = isbn;
         this.claveUsuario = clave_usuario;
         this.nss = NSS;
-        this.fechaPrestamo = new Date(año_prestamo, mes_prestamo, dias_prestamo);
+        this.diaPrestamo = dia_prestamo;
+        this.mesPrestamo = mes_prestamo;
+        this.añoPrestamo = año_prestamo;
     }
 
     public String getIsbn() {
@@ -27,4 +35,15 @@ public class Booking {
         return claveUsuario;
     }
 
+    public Integer getDiaPrestamo() {
+        return diaPrestamo;
+    }
+
+    public Integer getMesPrestamo() {
+        return mesPrestamo;
+    }
+
+    public Integer getAñoPrestamo() {
+        return añoPrestamo;
+    }
 }

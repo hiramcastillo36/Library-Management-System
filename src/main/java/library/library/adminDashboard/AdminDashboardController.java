@@ -51,7 +51,11 @@ public class AdminDashboardController {
     private TableColumn<Booking, Integer> userColumn;
 
     @FXML
-    private TableColumn<Booking, Date> dateColumn;
+    private TableColumn<Booking, Integer> dayColumn;
+    @FXML
+    private TableColumn<Booking, Integer> monthColumn;
+    @FXML
+    private TableColumn<Booking, Integer> yearColumn;
 
     private Booking booking;
     ObservableList<Booking> bookings = FXCollections.observableArrayList();
@@ -86,7 +90,9 @@ public class AdminDashboardController {
             }
             isbnColumn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
             userColumn.setCellValueFactory(new PropertyValueFactory<>("claveUsuario"));
-            dateColumn.setCellValueFactory(new PropertyValueFactory<>("fechaPrestamo"));
+            dayColumn.setCellValueFactory(new PropertyValueFactory<>("diaPrestamo"));
+            monthColumn.setCellValueFactory(new PropertyValueFactory<>("mesPrestamo"));
+            yearColumn.setCellValueFactory(new PropertyValueFactory<>("añoPrestamo"));
             tableBooking.setItems(bookings);
         } catch (Exception e) {
             e.printStackTrace();
@@ -98,7 +104,7 @@ public class AdminDashboardController {
             if (isbnBook.getText().isEmpty())
                 isbnError.setText("Ingrese un ISBN");
             if (studentEmail.getText().isEmpty())
-                studentEmailError.setText("Ingrese un correo");
+                studentEmailError.setText("Ingrese una clave de usuario");
             return true;
         }
         isbnError.setText("");

@@ -15,9 +15,11 @@
       <TextField fx:id="studentEmail" layoutX="383.0" layoutY="119.0" />
        <TableView fx:id="tableBooking" layoutX="69.0" layoutY="166.0" prefHeight="108.0" prefWidth="463.0">
            <columns>
-               <TableColumn fx:id="isbnColumn" prefWidth="83.0" text="ISBN" />
-               <TableColumn fx:id="userColumn" prefWidth="194.0" text="Clave Usuario" />
-               <TableColumn fx:id="dateColumn" prefWidth="185.0" text="Fecha de prestamo" />
+               <TableColumn fx:id="isbnColumn" prefWidth="45.0" text="ISBN" />
+               <TableColumn fx:id="userColumn" prefWidth="161.0" text="Clave Usuario" />
+               <TableColumn fx:id="dayColumn" minWidth="0.0" prefWidth="66.0" text="Dia" />
+            <TableColumn fx:id="monthColumn" minWidth="0.0" prefWidth="65.0" text="Mes" />
+            <TableColumn fx:id="yearColumn" minWidth="0.0" prefWidth="125.0" text="Año" />
            </columns>
        </TableView>
       <Label layoutX="117.0" layoutY="91.0" text="ISBN libro" />
