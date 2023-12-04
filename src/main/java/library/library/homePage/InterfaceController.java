@@ -31,7 +31,7 @@ public class InterfaceController
     private TextField searchBar = new TextField();
 
     @FXML
-    private TableColumn<Book, Integer> isbnColumn;
+    private TableColumn<Book, String> isbnColumn;
 
     @FXML
     private TableColumn <Book, String> titleColumn;
@@ -83,6 +83,18 @@ public class InterfaceController
                         e.printStackTrace();
                     }
                     break;
+                case "Realizar prestamo":
+                    try {
+                        FXMLLoader loader = new FXMLLoader(LibraryApplication.class.getResource("view/UserLoan.fxml"));
+                        Scene newScene = new Scene(loader.load());
+
+                        Stage currentStage = (Stage) dropdown.getScene().getWindow();
+                        currentStage.setScene(newScene);
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    break;
 
                 case "Cerrar Sesión":
                     LibraryApplication.signOut();
@@ -95,14 +107,13 @@ public class InterfaceController
     @javafx.fxml.FXML
     public void initialize() {
         ObservableList<String> list;
-        System.out.println(LibraryApplication.getSession());
         if(LibraryApplication.getSession() == null) {
             signin.setVisible(true);
             dropdown.setVisible(false);
         } else {
             signin.setVisible(false);
             dropdown.setVisible(true);
-            list = FXCollections.observableArrayList("Perfil", "Mis Libros", "Cerrar Sesión");
+            list = FXCollections.observableArrayList("Perfil", "Mis Libros","Realizar prestamo", "Cerrar Sesión");
             dropdown.setItems(list);
         }
 
@@ -110,7 +121,7 @@ public class InterfaceController
         try {
             rs = DatabaseController.executeQuery("SELECT * FROM Libro");
             while (rs.next()) {
-                Integer isbn = rs.getInt("ISBN");
+                String isbn = rs.getString("ISBN");
                 String title = rs.getString("Titulo");
                 String year = rs.getString("A_publicacion");
                 String floor = rs.getString("Piso");
@@ -145,11 +156,7 @@ public class InterfaceController
                         return true;
                     } else if (book.getShelf().toLowerCase().contains(lowerCaseFilter)) {
                         return true;
-                    } else if (book.getIsbn().toString().contains(lowerCaseFilter)) {
-                        return true;
-                    } else {
-                        return false;
-                    }
+                    } else return book.getIsbn().contains(lowerCaseFilter);
                 });
             });
 

@@ -10,14 +10,14 @@ import library.library.util.Session;
 import java.io.IOException;
 
 public class LibraryApplication extends Application {
-    private static Session session = new Session();
+    private static final Session session = new Session();
 
     private static Stage stage;
 
     @Override
     public void start(Stage stage) throws IOException {
-        this.stage = stage;
-        Parent root = FXMLLoader.load(getClass().getResource("view/AdminInterface.fxml"));
+        LibraryApplication.stage = stage;
+        Parent root = FXMLLoader.load(LibraryApplication.class.getResource("view/Interface.fxml"));
         stage.setTitle("Library");
         stage.setScene(new Scene(root, 600, 400));
         stage.show();

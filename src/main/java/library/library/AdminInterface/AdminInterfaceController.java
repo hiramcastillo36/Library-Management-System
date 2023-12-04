@@ -18,7 +18,9 @@ import library.library.models.Book;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -37,7 +39,7 @@ public class AdminInterfaceController implements Initializable {
     private VBox container;
 
     // Supongamos que tienes una lista de libros en tu controlador
-    private List<Book> listaLibros = new ArrayList<>();;
+    private final List<Book> listaLibros = new ArrayList<>();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -45,7 +47,7 @@ public class AdminInterfaceController implements Initializable {
        try {
             rs = DatabaseController.executeQuery("SELECT * FROM Libro");
             while (rs.next()) {
-                int isbn = rs.getInt("ISBN");
+                String isbn = rs.getString("ISBN");
                 String title = rs.getString("Titulo");
                 String year = rs.getString("A_publicacion");
                 String floor = rs.getString("Piso");
@@ -61,7 +63,6 @@ public class AdminInterfaceController implements Initializable {
         for (Book libro : listaLibros) {
             AnchorPane anchorPane = createDataAnchorPane(libro);
             container.getChildren().add(anchorPane);
-
         }
     }
 
@@ -72,6 +73,7 @@ public class AdminInterfaceController implements Initializable {
         anchorPane.setStyle("-fx-background-color: lightgray; -fx-border-color: darkgray;");
 
         Button deleteBook = new Button("Eliminar Libro");
+        deleteBook.setOnAction(event -> handleDeleteBook(libro));
         deleteBook.setLayoutX(414.0);
         deleteBook.setLayoutY(6.0);
         // Puedes configurar un evento para el botón de eliminar aquí
@@ -89,23 +91,31 @@ public class AdminInterfaceController implements Initializable {
         labelISBN.setLayoutY(10.0);
 
         anchorPane.getChildren().addAll(deleteBook, labelLibro, labelAutor, labelISBN);
-
+        anchorPane.setUserData(libro);
         return anchorPane;
+    }
+
+    private void handleDeleteBook(Book libro) {
+        try {
+            String deleteBooking = "DELETE FROM PRESTAMO WHERE ISBN = '" + libro.getIsbn() + "'";
+            PreparedStatement statement = DatabaseController.getConnection().prepareStatement(deleteBooking);
+            DatabaseController.executeInsert(statement);
+
+            String deleteBook = "DELETE FROM LIBRO WHERE ISBN = '" + libro.getIsbn() + "'";
+            statement = DatabaseController.getConnection().prepareStatement(deleteBook);
+            DatabaseController.executeInsert(statement);
+            container.getChildren().removeIf(node -> node.getUserData() == libro);
+        } catch (SQLException e){
+            e.printStackTrace();
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     @FXML
     void goBack(MouseEvent event) {
-        try {
-            // Cargar la nueva escena (en este caso, la escena anterior)
-            FXMLLoader loader = new FXMLLoader(LibraryApplication.class.getResource("view/Interface.fxml"));
-            Scene previousScene = new Scene(loader.load());
-
-            // Obtener el Stage actual y cambiar su escena
-            Stage currentStage = (Stage) back.getScene().getWindow();
-            currentStage.setScene(previousScene);
-        } catch (IOException e) {
-            e.printStackTrace(); // Manejo básico de excepciones, ajusta según sea necesario
-        }
+        LibraryApplication.changeScene("adminMenu");
     }
 
     public void askBook(MouseEvent mouseEvent) {
@@ -118,7 +128,7 @@ public class AdminInterfaceController implements Initializable {
             Stage currentStage = (Stage) back.getScene().getWindow();
             currentStage.setScene(previousScene);
         } catch (IOException e) {
-            e.printStackTrace(); // Manejo básico de excepciones, ajusta según sea necesario
+            e.printStackTrace();
         }
     }
 

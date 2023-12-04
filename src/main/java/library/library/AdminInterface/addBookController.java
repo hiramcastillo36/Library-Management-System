@@ -53,14 +53,14 @@ public class addBookController {
     void goBack(MouseEvent event) {
         try {
             // Cargar la nueva escena (en este caso, la escena anterior)
-            FXMLLoader loader = new FXMLLoader(LibraryApplication.class.getResource("view/AdminInterface.fxml"));
+            FXMLLoader loader = new FXMLLoader(LibraryApplication.class.getResource("view/booksDashboard.fxml"));
             Scene previousScene = new Scene(loader.load());
 
             // Obtener el Stage actual y cambiar su escena
             Stage currentStage = (Stage) back.getScene().getWindow();
             currentStage.setScene(previousScene);
         } catch (IOException e) {
-            e.printStackTrace(); // Manejo básico de excepciones, ajusta según sea necesario
+            e.printStackTrace();
         }
     }
 
@@ -147,14 +147,14 @@ public class addBookController {
         insertBook(nuevoLibro);
         try {
             // Cargar la nueva escena (en este caso, la escena anterior)
-            FXMLLoader loader = new FXMLLoader(LibraryApplication.class.getResource("view/AdminInterface.fxml"));
+            FXMLLoader loader = new FXMLLoader(LibraryApplication.class.getResource("view/booksDashboard.fxml"));
             Scene previousScene = new Scene(loader.load());
 
             // Obtener el Stage actual y cambiar su escena
             Stage currentStage = (Stage) back.getScene().getWindow();
             currentStage.setScene(previousScene);
         } catch (IOException e) {
-            e.printStackTrace(); // Manejo básico de excepciones, ajusta según sea necesario
+            e.printStackTrace();
         }
     }
 

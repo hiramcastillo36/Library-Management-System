@@ -1,32 +1,20 @@
 package library.library.controller;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import library.library.LibraryApplication;
-import library.library.models.Account;
-import library.library.models.Book;
-import library.library.models.Student;
 import javafx.fxml.Initializable;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class LoanController implements Initializable {
@@ -35,30 +23,7 @@ public class LoanController implements Initializable {
     private Text back;
 
     @FXML
-    private TableView<Book> loanTable;
-
-    @FXML
-    private TableColumn<Book, Integer> isbnColumn;
-
-    @FXML
-    private TableColumn<Book, String> titleColumn;
-
-    @FXML
-    private TableColumn<Book, String> yearColumn;
-
-    @FXML
-    private TableColumn<Book, String> floorColumn;
-
-    @FXML
-    private TableColumn<Book, String> shelfColumn;
-
-    @FXML
-    private TextField searchField;
-
-    @FXML
     private VBox container;
-
-    private ObservableList<Book> books = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -69,8 +34,6 @@ public class LoanController implements Initializable {
             ResultSet st;
             st = DatabaseController.executeQuery("SELECT * FROM estudiantes WHERE correo_electronico = '" + query + "'");
             if(st.next()){
-                System.out.println("Estudiante");
-                System.out.println(st.getString("Clave_Usuario"));
                 rs = DatabaseController.executeQuery("SELECT * FROM Autores\n" +
                         "INNER JOIN main.LIBRO L on L.ISBN = Autores.ISBN\n" +
                         "INNER JOIN main.PRESTAMO P on L.ISBN = P.ISBN\n" +
@@ -78,8 +41,6 @@ public class LoanController implements Initializable {
                 );
 
                 while (rs.next()) {
-                    System.out.println(rs.getString("Titulo"));
-                    System.out.println(rs.getString("NombreAutor"));
                     AnchorPane anchorPane = createDataAnchorPane(rs.getString("Titulo"), rs.getString("NombreAutor"), rs.getString("ISBN"));
                     container.getChildren().add(anchorPane);
                 }
@@ -87,7 +48,6 @@ public class LoanController implements Initializable {
         }catch (Exception e) {
             e.printStackTrace();
         }
-        // Crear AnchorPane dinámicamente para cada libro y agregarlos al VBox
     }
 
     private AnchorPane createDataAnchorPane(String title, String author, String isbn) {
@@ -95,8 +55,6 @@ public class LoanController implements Initializable {
         anchorPane.setPrefHeight(38.0);
         anchorPane.setPrefWidth(446.0);
         anchorPane.setStyle("-fx-background-color: lightgray; -fx-border-color: darkgray;");
-
-        // Puedes configurar un evento para el botón de eliminar aquí
 
         Label labelLibro = new Label(title);
         labelLibro.setLayoutX(14.0);
@@ -118,7 +76,6 @@ public class LoanController implements Initializable {
     @FXML
     void goBack(MouseEvent event) {
         try {
-            // Cargar la nueva escena (en este caso, la escena anterior)
             FXMLLoader loader = new FXMLLoader(LibraryApplication.class.getResource("view/Interface.fxml"));
             Scene previousScene = new Scene(loader.load());
 

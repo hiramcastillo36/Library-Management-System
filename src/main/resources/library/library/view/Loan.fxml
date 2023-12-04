@@ -15,7 +15,7 @@
             </VBox>
          </content>
       </ScrollPane>
-      <Label layoutX="350.0" layoutY="10.0" prefHeight="39.0" prefWidth="204.0" text="Libros Prestados" textFill="#bf2d2d">
+      <Label layoutX="350.0" layoutY="10.0" prefHeight="39.0" prefWidth="204.0" text="Mis libros" textFill="#bf2d2d">
          <font>
             <Font name="Calibri Bold Italic" size="30.0" />
          </font>

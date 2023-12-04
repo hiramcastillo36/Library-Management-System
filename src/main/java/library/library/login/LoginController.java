@@ -56,12 +56,11 @@ public class LoginController {
             if(accountType.equals("Estudiante"))
                 LibraryApplication.changeScene("Interface");
             else if(accountType.equals("Admin"))
-                LibraryApplication.changeScene("admin-dashboard");
+                LibraryApplication.changeScene("adminMenu");
         }
     }
     private boolean validateInput() {
         if (email.getText().isEmpty() || password.getText().isEmpty()) {
-            System.out.println("Email or password is empty");
             if(email.getText().isEmpty())
                 errorEmail.setText("No puede estar vacío");
             if (password.getText().isEmpty()) {
@@ -77,8 +76,6 @@ public class LoginController {
 
     @FXML
     protected void signUp() {
-        System.out.println("Email: " + email.getText());
-        System.out.println("Password: " + password.getText());
 
         if(validateInput())
             return;
@@ -91,7 +88,7 @@ public class LoginController {
             if(accountType.equals("Usuario"))
                 LibraryApplication.changeScene("Interface");
             else if(accountType.equals("Admin"))
-                LibraryApplication.changeScene("admin-dashboard");
+                LibraryApplication.changeScene("adminMenu");
         }
     }
 

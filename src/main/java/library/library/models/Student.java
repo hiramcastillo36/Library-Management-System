@@ -3,10 +3,10 @@ package library.library.models;
  * Represents a student in the library.
  */
 public class Student {
-    private String firstName;
-    private String lastName;
-    private String secondLastName;
-    private String id;
+    private final String firstName;
+    private final String lastName;
+    private final String secondLastName;
+    private final String id;
     /**
      * Constructs a Student object with the specified attributes.
      *

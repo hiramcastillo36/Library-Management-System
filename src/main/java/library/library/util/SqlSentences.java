@@ -12,7 +12,6 @@ public class SqlSentences {
         InputStream inputStream = LibraryApplication.class.getResourceAsStream(FILENAME);
         try {
             properties.load(inputStream);
-            System.out.println("ok");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -22,10 +21,5 @@ public class SqlSentences {
         return properties.getProperty(key);
     }
 
-    public static void main(String[] args) {
-        SqlSentences sqlQueries = new SqlSentences();
-        String selectAllUsersQuery = sqlQueries.getSentence("sessions.get.account.by.email");
-        System.out.println("Select All Users Query: " + selectAllUsersQuery);
-    }
 
 }

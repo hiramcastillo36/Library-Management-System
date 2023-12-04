@@ -5,20 +5,29 @@ import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import library.library.LibraryApplication;
 import library.library.controller.DatabaseController;
 import library.library.models.Book;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.util.ResourceBundle;
 import java.util.SortedMap;
 
 public class bookingController implements Initializable {
+    @FXML
+    private Text back;
     @FXML
     private TableView<Book> table = new TableView<>();
 
@@ -50,7 +59,7 @@ public class bookingController implements Initializable {
         try {
             rs = DatabaseController.executeQuery("SELECT * FROM Libro");
             while (rs.next()) {
-                Integer isbn = rs.getInt("ISBN");
+                String isbn = rs.getString("ISBN");
                 String title = rs.getString("Titulo");
                 String year = rs.getString("A_publicacion");
                 String floor = rs.getString("Piso");
@@ -83,11 +92,7 @@ public class bookingController implements Initializable {
                         return true;
                     } else if (book.getShelf().toLowerCase().contains(lowerCaseFilter)) {
                         return true;
-                    } else if (book.getIsbn().toString().contains(lowerCaseFilter)) {
-                        return true;
-                    } else {
-                        return false;
-                    }
+                    } else return book.getIsbn().contains(lowerCaseFilter);
                 });
             });
 
@@ -96,6 +101,21 @@ public class bookingController implements Initializable {
             table.setItems(filteredData);
 
         }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void goBack(MouseEvent event) {
+        try {
+            // Cargar la nueva escena (en este caso, la escena anterior)
+            FXMLLoader loader = new FXMLLoader(LibraryApplication.class.getResource("view/AdminMenu.fxml"));
+            Scene previousScene = new Scene(loader.load());
+
+            // Obtener el Stage actual y cambiar su escena
+            Stage currentStage = (Stage) back.getScene().getWindow();
+            currentStage.setScene(previousScene);
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
