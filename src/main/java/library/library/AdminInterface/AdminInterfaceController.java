@@ -179,7 +179,7 @@ public class AdminInterfaceController implements Initializable {
     private boolean isBookBorrowed(Book libro) {
         ResultSet rs = null;
         try {
-            rs = DatabaseController.executeQuery("SELECT * FROM PRESTAMO WHERE ISBN = '" + libro.getIsbn() + "'");
+            rs = DatabaseController.executeQuery("SELECT * FROM PRESTAMO WHERE ISBN = '" + libro.getISBN() + "'");
             if (rs.next()) {
                 return true;
             }
