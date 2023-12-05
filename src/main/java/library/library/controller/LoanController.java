@@ -17,6 +17,10 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.util.ResourceBundle;
 
+/**
+ * Controller class for managing user loans.
+ * Handles UI elements and user interactions related to loan information.
+ */
 public class LoanController implements Initializable {
 
     @FXML
@@ -25,11 +29,20 @@ public class LoanController implements Initializable {
     @FXML
     private VBox container;
 
+    /**
+     * Initializes the LoanController, populating loan information for the current user.
+     *
+     * @param url            The location used to resolve relative paths for the root object,
+     *                       or null if the location is not known.
+     * @param resourceBundle The resources used to localize the root object, or null if the root
+     *                       object was not localized.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         ResultSet rs = null;
         try {
+            // Get the current user's email and retrieve their loans
             String query = LibraryApplication.getSession().getEmail();
             ResultSet st;
             st = DatabaseController.executeQuery("SELECT * FROM estudiantes WHERE correo_electronico = '" + query + "'");
@@ -40,6 +53,7 @@ public class LoanController implements Initializable {
                         "WHERE P.Clave_Usuario = " + st.getString("Clave_Usuario")
                 );
 
+                // Create and add UI elements for each loan
                 while (rs.next()) {
                     AnchorPane anchorPane = createDataAnchorPane(rs.getString("Titulo"), rs.getString("NombreAutor"), rs.getString("ISBN"));
                     container.getChildren().add(anchorPane);
@@ -50,6 +64,14 @@ public class LoanController implements Initializable {
         }
     }
 
+    /**
+     * Creates an AnchorPane with loan information.
+     *
+     * @param title  The title of the book.
+     * @param author The author of the book.
+     * @param isbn   The ISBN of the book.
+     * @return The created AnchorPane.
+     */
     private AnchorPane createDataAnchorPane(String title, String author, String isbn) {
         AnchorPane anchorPane = new AnchorPane();
         anchorPane.setPrefHeight(38.0);
@@ -73,13 +95,19 @@ public class LoanController implements Initializable {
         return anchorPane;
     }
 
+    /**
+     * Handles the event when the user clicks the "Back" button.
+     * Returns to the main interface view.
+     *
+     * @param event The mouse event triggered by the user.
+     */
     @FXML
     void goBack(MouseEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(LibraryApplication.class.getResource("view/Interface.fxml"));
             Scene previousScene = new Scene(loader.load());
 
-            // Obtener el Stage actual y cambiar su escena
+            // Obtain the current Stage and change its scene
             Stage currentStage = (Stage) back.getScene().getWindow();
             currentStage.setScene(previousScene);
         } catch (IOException e) {

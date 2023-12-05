@@ -10,11 +10,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Manages user sessions, including sign-in, sign-up, and sign-out operations.
+ */
 public class Session {
 
     private Account currentUser = null;
 
-
+    /**
+     * Attempts to sign in a user with the provided email and password.
+     *
+     * @param email    The email of the user.
+     * @param password The password for the user.
+     * @return -1 if the email doesn't exist, 0 if the password is incorrect, 1 if signed in successfully.
+     */
     public int signIn(String email, String password) {
         // -1: Email doesn't exist
         // 0: Wrong password
@@ -33,7 +42,7 @@ public class Session {
             } else {
                 return -1;
             }
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
@@ -43,10 +52,19 @@ public class Session {
         return -2;
     }
 
+    /**
+     * Attempts to sign up a new user with the provided information.
+     *
+     * @param clave           The unique identifier for the user.
+     * @param password        The password for the user.
+     * @param nombre          The first name of the user.
+     * @param apellidoPaterno The last name of the user.
+     * @param apellidoMaterno The second last name of the user.
+     * @return 0 if the account already exists, 1 if signed up successfully.
+     */
     public int signUp(String clave, String password,
                       String nombre, String apellidoPaterno,
-                      String apellidoMaterno
-                      ) {
+                      String apellidoMaterno) {
         ResultSet rs = null;
         String email = clave + "@alumnos.uaslp.mx";
         try {
@@ -72,7 +90,7 @@ public class Session {
                 currentUser = new Account(email, "Estudiante");
                 return 1;
             }
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
@@ -82,13 +100,20 @@ public class Session {
         return -1;
     }
 
+    /**
+     * Gets the currently signed-in user.
+     *
+     * @return The currently signed-in user, or null if no user is signed in.
+     */
     public Account getCurrentUser() {
         return currentUser;
     }
 
+    /**
+     * Signs out the current user and changes the scene to the main interface.
+     */
     public void signOut() {
         currentUser = null;
         LibraryApplication.changeScene("interface");
     }
-
 }

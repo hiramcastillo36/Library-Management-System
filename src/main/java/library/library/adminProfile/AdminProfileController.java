@@ -14,7 +14,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+/**
+ * Controller class for the administrator profile interface.
+ * Manages the display of administrator profile information and navigation.
+ */
 public class AdminProfileController implements Initializable {
+
     @FXML
     private Text back;
 
@@ -27,6 +32,12 @@ public class AdminProfileController implements Initializable {
     @FXML
     private TextField accountType;
 
+    /**
+     * Initializes the administrator profile with user information.
+     *
+     * @param url            The location used to resolve relative paths for the root object.
+     * @param resourceBundle The resources for the root object, or null if none.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ResultSet rs = null;
@@ -43,9 +54,13 @@ public class AdminProfileController implements Initializable {
         Account account = LibraryApplication.getSession();
         email.setText(account.getEmail());
         accountType.setText(account.getAccountType());
-
     }
 
+    /**
+     * Navigates back to the administrator menu.
+     *
+     * @param mouseEvent The mouse event triggering the navigation.
+     */
     public void goBack(MouseEvent mouseEvent) {
         LibraryApplication.changeScene("adminMenu");
     }
