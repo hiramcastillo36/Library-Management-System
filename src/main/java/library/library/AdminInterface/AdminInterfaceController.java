@@ -106,7 +106,7 @@ public class AdminInterfaceController implements Initializable {
         labelAutor.setLayoutX(200.0);
         labelAutor.setLayoutY(10.0);
 
-        Label labelISBN = new Label(String.valueOf(libro.getIsbn()));
+        Label labelISBN = new Label(String.valueOf(libro.getISBN()));
         labelISBN.setLayoutX(300.0);
         labelISBN.setLayoutY(10.0);
 

@@ -183,7 +183,7 @@ public class InterfaceController implements Initializable
                             book.getYear().toLowerCase().contains(lowerCaseFilter) ||
                             book.getFloor().toLowerCase().contains(lowerCaseFilter) ||
                             book.getShelf().toLowerCase().contains(lowerCaseFilter) ||
-                            book.getIsbn().contains(lowerCaseFilter);
+                            book.getISBN().contains(lowerCaseFilter);
                 });
             });
 
