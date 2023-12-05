@@ -14,10 +14,14 @@ import library.library.LibraryApplication;
 
 import java.io.IOException;
 
+/**
+ * Controller class for the sign-up view.
+ * Manages the UI elements and user interactions on the sign-up view.
+ */
 public class SignUp {
     @FXML
     private Text back;
-    
+
     @FXML
     private Button buttonSignUp;
 
@@ -26,13 +30,13 @@ public class SignUp {
 
     @FXML
     private TextField nombre;
-    
+
     @FXML
     private TextField apellidoPaterno;
-    
+
     @FXML
     private TextField apellidoMaterno;
-    
+
     @FXML
     private PasswordField password;
 
@@ -55,18 +59,21 @@ public class SignUp {
     @FXML
     private Label account;
 
+    /**
+     * Handles the sign-up action.
+     * Validates the user input, performs sign-up, and changes the scene accordingly.
+     */
     @FXML
     protected void signUp() {
-
         if(validateInput())
             return;
 
         int result = LibraryApplication.signUp( claveUnica.getText(),
-                                                password.getText(),
-                                                nombre.getText(),
-                                                apellidoPaterno.getText(),
-                                                apellidoMaterno.getText()
-                                                );
+                password.getText(),
+                nombre.getText(),
+                apellidoPaterno.getText(),
+                apellidoMaterno.getText()
+        );
         if(result == 0)
             claveError.setText("Cuenta ya existe");
         else if(result == 1){
@@ -78,6 +85,13 @@ public class SignUp {
         }
     }
 
+    /**
+     * Validates the input fields.
+     * Checks if the required fields are not empty.
+     * Displays error messages if needed.
+     *
+     * @return True if validation fails, false otherwise.
+     */
     private boolean validateInput() {
         boolean error = false;
         if (claveUnica.getText().isEmpty() ||
@@ -110,9 +124,14 @@ public class SignUp {
         return false;
     }
 
+    /**
+     * Handles the "Go Back" action.
+     * Changes the scene back to the login view.
+     *
+     * @param event The mouse event triggered by the user.
+     */
     @FXML
     void goBack(MouseEvent event) {
         LibraryApplication.changeScene("Login");
     }
-
 }

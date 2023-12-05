@@ -22,6 +22,10 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.util.ResourceBundle;
 
+/**
+ * Controller class for the main interface.
+ * Manages the UI elements and user interactions on the main interface.
+ */
 public class InterfaceController implements Initializable
 {
     @FXML
@@ -55,6 +59,12 @@ public class InterfaceController implements Initializable
 
     ObservableList<Book> books = FXCollections.observableArrayList();
 
+    /**
+     * Handles the selection of an item from the dropdown menu.
+     * Performs different actions based on the selected option.
+     *
+     * @param event The action event triggered by the user.
+     */
     @FXML
     void Select(ActionEvent event) {
         String op = dropdown.getSelectionModel().getSelectedItem();
@@ -62,6 +72,7 @@ public class InterfaceController implements Initializable
         if (op != null) {
             switch (op) {
                 case "Perfil":
+                    // Change the scene to the account interface view
                     try {
                         FXMLLoader loader = new FXMLLoader(LibraryApplication.class.getResource("view/AccountInterface.fxml"));
                         Scene newScene = new Scene(loader.load());
@@ -75,6 +86,7 @@ public class InterfaceController implements Initializable
                     break;
 
                 case "Mis Libros":
+                    // Change the scene to the loan view
                     try {
                         FXMLLoader loader = new FXMLLoader(LibraryApplication.class.getResource("view/Loan.fxml"));
                         Scene newScene = new Scene(loader.load());
@@ -87,6 +99,7 @@ public class InterfaceController implements Initializable
                     }
                     break;
                 case "Realizar prestamo":
+                    // Change the scene to the user loan view
                     try {
                         FXMLLoader loader = new FXMLLoader(LibraryApplication.class.getResource("view/UserLoan.fxml"));
                         Scene newScene = new Scene(loader.load());
@@ -100,14 +113,21 @@ public class InterfaceController implements Initializable
                     break;
 
                 case "Cerrar Sesión":
+                    // Sign out from the application
                     LibraryApplication.signOut();
                 default:
-                    // Manejar otras opciones según sea necesario
+                    // Handle other options as needed
                     break;
             }
         }
     }
 
+    /**
+     * Handles the mouse click event for the "Sign In" label.
+     * Changes the scene to the login view.
+     *
+     * @param mouseEvent The mouse event triggered by the user.
+     */
     public void signin(MouseEvent mouseEvent) {
         LibraryApplication.changeScene("Login");
     }
@@ -127,6 +147,7 @@ public class InterfaceController implements Initializable
 
         ResultSet rs = null;
         try {
+            // Retrieve book information from the database
             rs = DatabaseController.executeQuery("SELECT * FROM Libro");
             while (rs.next()) {
                 String isbn = rs.getString("ISBN");
@@ -138,6 +159,7 @@ public class InterfaceController implements Initializable
                 books.add(new Book(isbn, title, year, floor, shelf));
             }
 
+            // Set up table columns and populate the table
             isbnColumn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
             titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
             yearColumn.setCellValueFactory(new PropertyValueFactory<>("year"));
@@ -146,6 +168,7 @@ public class InterfaceController implements Initializable
 
             table.setItems(books);
 
+            // Set up filtering for the table
             FilteredList<Book> filteredData = new FilteredList<>(books, b -> true);
 
             searchBar.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -156,15 +179,11 @@ public class InterfaceController implements Initializable
 
                     String lowerCaseFilter = newValue.toLowerCase();
 
-                    if (book.getTitle().toLowerCase().contains(lowerCaseFilter)) {
-                        return true;
-                    } else if (book.getYear().toLowerCase().contains(lowerCaseFilter)) {
-                        return true;
-                    } else if (book.getFloor().toLowerCase().contains(lowerCaseFilter)) {
-                        return true;
-                    } else if (book.getShelf().toLowerCase().contains(lowerCaseFilter)) {
-                        return true;
-                    } else return book.getIsbn().contains(lowerCaseFilter);
+                    return book.getTitle().toLowerCase().contains(lowerCaseFilter) ||
+                            book.getYear().toLowerCase().contains(lowerCaseFilter) ||
+                            book.getFloor().toLowerCase().contains(lowerCaseFilter) ||
+                            book.getShelf().toLowerCase().contains(lowerCaseFilter) ||
+                            book.getISBN().contains(lowerCaseFilter);
                 });
             });
 
@@ -172,9 +191,8 @@ public class InterfaceController implements Initializable
             sortedData.comparatorProperty().bind(table.comparatorProperty());
             table.setItems(filteredData);
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 }
-

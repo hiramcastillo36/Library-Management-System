@@ -20,6 +20,10 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+/**
+ * Controller class for the administrator dashboard.
+ * Manages booking search, confirmation, and navigation within the admin dashboard.
+ */
 public class AdminDashboardController {
     @FXML
     private Text back;
@@ -60,9 +64,13 @@ public class AdminDashboardController {
     private Booking booking;
     ObservableList<Booking> bookings = FXCollections.observableArrayList();
 
+    /**
+     * Handles the search action for a book reservation.
+     * Retrieves and displays booking details based on ISBN and user key.
+     */
     @FXML
     protected void searchBook() {
-        // check if the email and password is not empty
+        // Check if the email and password are not empty
         if (validateInput()) {
             return;
         }
@@ -99,12 +107,17 @@ public class AdminDashboardController {
         }
     }
 
+    /**
+     * Validates the input fields for ISBN and student email.
+     *
+     * @return True if any input field is empty; false otherwise.
+     */
     private boolean validateInput() {
         if (isbnBook.getText().isEmpty() || studentEmail.getText().isEmpty()) {
             if (isbnBook.getText().isEmpty())
-                isbnError.setText("Ingrese un ISBN");
+                isbnError.setText("Enter an ISBN");
             if (studentEmail.getText().isEmpty())
-                studentEmailError.setText("Ingrese una clave");
+                studentEmailError.setText("Enter a user key");
             return true;
         }
         isbnError.setText("");
@@ -112,6 +125,11 @@ public class AdminDashboardController {
         return false;
     }
 
+    /**
+     * Confirms and deletes the selected booking.
+     *
+     * @param actionEvent The event triggering the confirmation.
+     */
     public void confirmBooking(ActionEvent actionEvent) {
         try {
             String deleteBooking = "DELETE FROM PRESTAMO WHERE ISBN = ? AND Clave_Usuario = ?";
@@ -129,14 +147,19 @@ public class AdminDashboardController {
         }
     }
 
+    /**
+     * Navigates back to the administrator menu.
+     *
+     * @param event The mouse event triggering the navigation.
+     */
     @FXML
     void goBack(MouseEvent event) {
         try {
-            // Cargar la nueva escena (en este caso, la escena anterior)
+            // Load the new scene (in this case, the previous scene)
             FXMLLoader loader = new FXMLLoader(LibraryApplication.class.getResource("view/adminMenu.fxml"));
             Scene previousScene = new Scene(loader.load());
 
-            // Obtener el Stage actual y cambiar su escena
+            // Get the current Stage and change its scene
             Stage currentStage = (Stage) back.getScene().getWindow();
             currentStage.setScene(previousScene);
         } catch (IOException e) {

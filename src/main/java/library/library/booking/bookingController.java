@@ -25,9 +25,16 @@ import java.sql.ResultSet;
 import java.util.ResourceBundle;
 import java.util.SortedMap;
 
+
+/**
+ * Controller class for the booking interface.
+ * Manages the display of books, filtering, and navigation.
+ */
 public class bookingController implements Initializable {
+
     @FXML
     private Text back;
+
     @FXML
     private TableView<Book> table = new TableView<>();
 
@@ -35,24 +42,28 @@ public class bookingController implements Initializable {
     private TextField searchBar = new TextField();
 
     @FXML
-    private TableColumn <Book, Integer> isbnColumn;
+    private TableColumn<Book, Integer> isbnColumn;
 
     @FXML
-    private TableColumn <Book, String> titleColumn;
+    private TableColumn<Book, String> titleColumn;
 
     @FXML
-    private TableColumn <Book, String> yearColumn;
+    private TableColumn<Book, String> yearColumn;
 
-    // piso columna
     @FXML
-    private TableColumn <Book, String> floorColumn;
+    private TableColumn<Book, String> floorColumn;
 
-    // estante columna
     @FXML
-    private TableColumn <Book, String> shelfColumn;
+    private TableColumn<Book, String> shelfColumn;
 
     ObservableList<Book> books = FXCollections.observableArrayList();
 
+    /**
+     * Initializes the booking interface with book data and sets up filtering.
+     *
+     * @param url            The location used to resolve relative paths for the root object.
+     * @param resourceBundle The resources for the root object, or null if none.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ResultSet rs = null;
@@ -92,7 +103,7 @@ public class bookingController implements Initializable {
                         return true;
                     } else if (book.getShelf().toLowerCase().contains(lowerCaseFilter)) {
                         return true;
-                    } else return book.getIsbn().contains(lowerCaseFilter);
+                    } else return book.getISBN().contains(lowerCaseFilter);
                 });
             });
 
@@ -100,19 +111,24 @@ public class bookingController implements Initializable {
             sortedData.comparatorProperty().bind(table.comparatorProperty());
             table.setItems(filteredData);
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Navigates back to the administrator menu.
+     *
+     * @param event The mouse event triggering the navigation.
+     */
     @FXML
     void goBack(MouseEvent event) {
         try {
-            // Cargar la nueva escena (en este caso, la escena anterior)
+            // Load the new scene (in this case, the previous scene)
             FXMLLoader loader = new FXMLLoader(LibraryApplication.class.getResource("view/AdminMenu.fxml"));
             Scene previousScene = new Scene(loader.load());
 
-            // Obtener el Stage actual y cambiar su escena
+            // Get the current Stage and set its scene
             Stage currentStage = (Stage) back.getScene().getWindow();
             currentStage.setScene(previousScene);
         } catch (IOException e) {

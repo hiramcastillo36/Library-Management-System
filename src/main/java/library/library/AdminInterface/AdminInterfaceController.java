@@ -1,4 +1,5 @@
 package library.library.AdminInterface;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -7,7 +8,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -26,6 +26,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * Controller class for the administrator interface.
+ * Manages the display of books and authors, deletion of books, and navigation.
+ */
 public class AdminInterfaceController implements Initializable {
     @FXML
     private Button addBook;
@@ -42,10 +46,16 @@ public class AdminInterfaceController implements Initializable {
     private final List<Book> listaLibros = new ArrayList<>();
     private final List<String> listaAutores = new ArrayList<>();
 
+    /**
+     * Initializes the controller with book and author data.
+     *
+     * @param url            The location used to resolve relative paths for the root object.
+     * @param resourceBundle The resources for the root object, or null if none.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ResultSet rs = null;
-       try {
+        try {
             rs = DatabaseController.executeQuery("SELECT * FROM Autores\n" +
                     "INNER JOIN main.LIBRO L on L.ISBN = Autores.ISBN;");
 
@@ -61,7 +71,7 @@ public class AdminInterfaceController implements Initializable {
                 listaAutores.add(author);
             }
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         for (Book libro : listaLibros) {
@@ -70,6 +80,13 @@ public class AdminInterfaceController implements Initializable {
         }
     }
 
+    /**
+     * Creates an AnchorPane for displaying book and author information.
+     *
+     * @param libro  The Book object to be displayed.
+     * @param author The author of the book.
+     * @return The created AnchorPane.
+     */
     private AnchorPane createDataAnchorPane(Book libro, String author) {
         AnchorPane anchorPane = new AnchorPane();
         anchorPane.setPrefHeight(38.0);
@@ -80,7 +97,6 @@ public class AdminInterfaceController implements Initializable {
         deleteBook.setOnAction(event -> handleDeleteBook(libro));
         deleteBook.setLayoutX(414.0);
         deleteBook.setLayoutY(6.0);
-        // Puedes configurar un evento para el botón de eliminar aquí
 
         Label labelLibro = new Label(libro.getTitle());
         labelLibro.setLayoutX(14.0);
@@ -90,7 +106,7 @@ public class AdminInterfaceController implements Initializable {
         labelAutor.setLayoutX(200.0);
         labelAutor.setLayoutY(10.0);
 
-        Label labelISBN = new Label(String.valueOf(libro.getIsbn()));
+        Label labelISBN = new Label(String.valueOf(libro.getISBN()));
         labelISBN.setLayoutX(300.0);
         labelISBN.setLayoutY(10.0);
 
@@ -99,8 +115,13 @@ public class AdminInterfaceController implements Initializable {
         return anchorPane;
     }
 
+    /**
+     * Handles the deletion of a book.
+     *
+     * @param libro The Book object to be deleted.
+     */
     private void handleDeleteBook(Book libro) {
-        if(isBookBorrowed(libro)){
+        if (isBookBorrowed(libro)) {
             showErrorAlert("Error", "El libro no se puede eliminar porque está prestado");
             return;
         } else {
@@ -108,18 +129,26 @@ public class AdminInterfaceController implements Initializable {
         }
     }
 
+    /**
+     * Navigates back to the administrator menu.
+     *
+     * @param event The mouse event triggering the navigation.
+     */
     @FXML
     void goBack(MouseEvent event) {
         LibraryApplication.changeScene("adminMenu");
     }
 
+    /**
+     * Navigates to the add book interface.
+     *
+     * @param mouseEvent The mouse event triggering the navigation.
+     */
     public void askBook(MouseEvent mouseEvent) {
         try {
-            // Cargar la nueva escena (en este caso, la escena anterior)
             FXMLLoader loader = new FXMLLoader(LibraryApplication.class.getResource("view/addBookInterface.fxml"));
             Scene previousScene = new Scene(loader.load());
 
-            // Obtener el Stage actual y cambiar su escena
             Stage currentStage = (Stage) back.getScene().getWindow();
             currentStage.setScene(previousScene);
         } catch (IOException e) {
@@ -127,6 +156,12 @@ public class AdminInterfaceController implements Initializable {
         }
     }
 
+    /**
+     * Displays an error alert with the specified title and content.
+     *
+     * @param title   The title of the error alert.
+     * @param content The content of the error alert.
+     */
     private void showErrorAlert(String title, String content) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
@@ -135,30 +170,41 @@ public class AdminInterfaceController implements Initializable {
         alert.showAndWait();
     }
 
-    private boolean isBookBorrowed(Book libro){
+    /**
+     * Checks if a book is currently borrowed.
+     *
+     * @param libro The Book object to check.
+     * @return True if the book is borrowed, false otherwise.
+     */
+    private boolean isBookBorrowed(Book libro) {
         ResultSet rs = null;
         try {
-            rs = DatabaseController.executeQuery("SELECT * FROM PRESTAMO WHERE ISBN = '" + libro.getIsbn() + "'");
-            if(rs.next()){
+            rs = DatabaseController.executeQuery("SELECT * FROM PRESTAMO WHERE ISBN = '" + libro.getISBN() + "'");
+            if (rs.next()) {
                 return true;
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
     }
 
-    public void deleteBook(Book libro){
+    /**
+     * Deletes a book from the database and updates the UI.
+     *
+     * @param libro The Book object to be deleted.
+     */
+    public void deleteBook(Book libro) {
         try {
-            String deleteBook = "DELETE FROM LIBRO WHERE ISBN = '" + libro.getIsbn() + "'";
+            String deleteBook = "DELETE FROM LIBRO WHERE ISBN = '" + libro.getISBN() + "'";
             DatabaseController.getConnection().prepareStatement(deleteBook);
             PreparedStatement statement;
             statement = DatabaseController.getConnection().prepareStatement(deleteBook);
             DatabaseController.executeInsert(statement);
             container.getChildren().removeIf(node -> node.getUserData() == libro);
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
