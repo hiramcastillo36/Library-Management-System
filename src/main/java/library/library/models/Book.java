@@ -1,15 +1,18 @@
 package library.library.models;
-
 /**
  * Represents a book in the library.
  */
 public class Book {
 
-    private String isbn;
-    private String title;
-    private String year;
-    private String floor;
-    private String shelf;
+    String isbn;
+
+    String title;
+
+    String year;
+
+    String floor;
+
+    String shelf;
 
     /**
      * Constructs a Book object with the specified attributes.
@@ -20,6 +23,7 @@ public class Book {
      * @param floor The floor where the book is located in the library.
      * @param shelf The shelf where the book is placed on the floor.
      */
+
     public Book(String ISBN, String title, String year, String floor, String shelf) {
         this.isbn = ISBN;
         this.title = title;
@@ -28,15 +32,20 @@ public class Book {
         this.shelf = shelf;
     }
 
+
     /**
      * Gets the ISBN (unique identifier) of the book.
      *
      * @return The ISBN of the book.
      */
-    public String getISBN() {
+    public String getIsbn() {
         return isbn;
     }
-
+    /**
+     * Gets the title of the book.
+     *
+     * @return The title of the book.
+     */
     /**
      * Gets the title of the book.
      *
@@ -58,7 +67,7 @@ public class Book {
     /**
      * Gets the floor where the book is located in the library.
      *
-     * @return The floor of the book.
+     * @return The floor where the book is located.
      */
     public String getFloor() {
         return floor;
@@ -67,25 +76,34 @@ public class Book {
     /**
      * Gets the shelf where the book is placed on the floor.
      *
-     * @return The shelf of the book.
+     * @return The shelf where the book is placed.
      */
     public String getShelf() {
         return shelf;
     }
 
     /**
-     * Sets the ISBN of the book.
+     * Sets the ISBN (unique identifier) of the book.
      *
-     * @param isbn The ISBN to set.
+     * @param isbn The ISBN of the book.
      */
     public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
 
     /**
+     * Sets the floor where the book is located in the library.
+     *
+     * @param floor The floor where the book is located.
+     */
+    public void setFloor(String floor) {
+        this.floor = floor;
+    }
+
+    /**
      * Sets the title of the book.
      *
-     * @param title The title to set.
+     * @param title The title of the book.
      */
     public void setTitle(String title) {
         this.title = title;
@@ -94,25 +112,16 @@ public class Book {
     /**
      * Sets the publication year of the book.
      *
-     * @param year The publication year to set.
+     * @param year The publication year of the book.
      */
     public void setYear(String year) {
         this.year = year;
     }
 
     /**
-     * Sets the floor where the book is located in the library.
-     *
-     * @param floor The floor to set.
-     */
-    public void setFloor(String floor) {
-        this.floor = floor;
-    }
-
-    /**
      * Sets the shelf where the book is placed on the floor.
      *
-     * @param shelf The shelf to set.
+     * @param shelf The shelf where the book is placed.
      */
     public void setShelf(String shelf) {
         this.shelf = shelf;
