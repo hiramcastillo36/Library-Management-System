@@ -114,6 +114,6 @@ public class Session {
      */
     public void signOut() {
         currentUser = null;
-        LibraryApplication.changeScene("interface");
+        LibraryApplication.changeScene("Interface");
     }
 }
