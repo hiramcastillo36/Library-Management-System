@@ -164,7 +164,7 @@ public class addBookController {
             Connection connection = DatabaseController.getConnection();  // Implement your logic to get a connection
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
-            preparedStatement.setString(1, book.getISBN());
+            preparedStatement.setString(1, book.getIsbn());
             preparedStatement.setString(2, book.getTitle());
             preparedStatement.setString(3, book.getYear());
             preparedStatement.setInt(4, 123456);  // Replace with the actual Id_Editorial

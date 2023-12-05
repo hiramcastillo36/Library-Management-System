@@ -106,7 +106,7 @@ public class AdminInterfaceController implements Initializable {
         labelAutor.setLayoutX(200.0);
         labelAutor.setLayoutY(10.0);
 
-        Label labelISBN = new Label(String.valueOf(libro.getISBN()));
+        Label labelISBN = new Label(String.valueOf(libro.getIsbn()));
         labelISBN.setLayoutX(300.0);
         labelISBN.setLayoutY(10.0);
 
@@ -179,7 +179,7 @@ public class AdminInterfaceController implements Initializable {
     private boolean isBookBorrowed(Book libro) {
         ResultSet rs = null;
         try {
-            rs = DatabaseController.executeQuery("SELECT * FROM PRESTAMO WHERE ISBN = '" + libro.getISBN() + "'");
+            rs = DatabaseController.executeQuery("SELECT * FROM PRESTAMO WHERE ISBN = '" + libro.getIsbn() + "'");
             if (rs.next()) {
                 return true;
             }
@@ -196,7 +196,7 @@ public class AdminInterfaceController implements Initializable {
      */
     public void deleteBook(Book libro) {
         try {
-            String deleteBook = "DELETE FROM LIBRO WHERE ISBN = '" + libro.getISBN() + "'";
+            String deleteBook = "DELETE FROM LIBRO WHERE ISBN = '" + libro.getIsbn() + "'";
             DatabaseController.getConnection().prepareStatement(deleteBook);
             PreparedStatement statement;
             statement = DatabaseController.getConnection().prepareStatement(deleteBook);
